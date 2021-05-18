@@ -69,7 +69,7 @@ USE ucandb;
 
     CREATE TABLE cliente (cliente_pk SERIAL NOT NULL PRIMARY KEY, pessoa_fk INTEGER NOT NULL, CONSTRAINT pessoa_fk FOREIGN KEY(pessoa_fk) REFERENCES pessoa(pessoa_pk) MATCH SIMPLE);
 
-    CREATE TABLE proprietario (proprietario_pk SERIAL NOT NULL PRIMARY KEY, pessoa_fk INTEGER NOT NULL, pessoa_fk INTEGER NOT NULL, CONSTRAINT pessoa_fk FOREIGN KEY(pessoa_fk) REFERENCES pessoa(pessoa_pk) MATCH SIMPLE);
+    CREATE TABLE proprietario (proprietario_pk SERIAL NOT NULL PRIMARY KEY, pessoa_fk INTEGER NOT NULL, CONSTRAINT pessoa_fk FOREIGN KEY(pessoa_fk) REFERENCES pessoa(pessoa_pk) MATCH SIMPLE);
 
     CREATE TABLE fiador (fiador_pk SERIAL NOT NULL PRIMARY KEY, pessoa_fk INTEGER NOT NULL, CONSTRAINT pessoa_fk FOREIGN KEY(pessoa_fk) REFERENCES pessoa(pessoa_pk) MATCH SIMPLE);
 
@@ -82,7 +82,10 @@ USE ucandb;
                         CONSTRAINT proprietario_fk FOREIGN KEY(proprietario_fk) REFERENCES proprietario(proprietario_pk) MATCH SIMPLE,
                         CONSTRAINT tipo_imovel_fk FOREIGN KEY(tipo_imovel_fk) REFERENCES tipo_imovel(tipo_imovel_pk) MATCH SIMPLE);
 
-   CREATE TABLE contrato (contrato_pk SERIAL NOT NULL PRIMARY KEY, imovel_fk INTEGER NOT NULL, cliente_fk INTEGER NOT NULL, fiador_fk INTEGER NOT NULL, data_inicio CHARACTER VARYING(45) NOT NULL, data_fim CHARACTER VARYING(45) NOT NULL
-                         estado_contrato CHARACTER VARYING (45) NOT NULL, valor_pagamento NUMERIC(10,2) total NUMERIC(10,2) )
+   CREATE TABLE contrato (contrato_pk SERIAL NOT NULL PRIMARY KEY, imovel_fk INTEGER NOT NULL, cliente_fk INTEGER NOT NULL, fiador_fk INTEGER NOT NULL, data_inicio CHARACTER VARYING(45) NOT NULL, data_fim CHARACTER VARYING(45) NOT NULL,
+                         estado_contrato CHARACTER VARYING (45) NOT NULL, valor_pagamento NUMERIC(10,2), total NUMERIC(10,2),
+                          CONSTRAINT imovel_fk FOREIGN KEY(imovel_fk) REFERENCES imovel(imovel_pk) MATCH SIMPLE,
+                          CONSTRAINT cliente_fk FOREIGN KEY(cliente_fk) REFERENCES cliente(cliente_pk) MATCH SIMPLE,
+                          CONSTRAINT fiador_fk FOREIGN KEY(fiador_fk) REFERENCES fiador(fiador_pk) MATCH SIMPLE);
     
 
