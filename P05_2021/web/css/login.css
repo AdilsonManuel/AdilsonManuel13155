@@ -1,194 +1,76 @@
-html {
-    --purple-principal: #7519eb;
-    --purple-secondary: #a259ff;
-    --purple-tertiary: #b982ff;
-    --purple-white-text: white;
-    --black-principal: #222222;
-    --black-secondary: #535353;
-    --black-tertiary: #7d7c7c;
-    --orange: #ff9900;
-}
-* {
-    box-sizing: border-box;
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 31, 2021, 9:46:38 PM
+    Author     : azm
+*/
+
+body{
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
+    background: #34495e;
 }
-body {
-    background-color: var(--purple-principal);
-    font-family: "Segoe UI";
-}
-.container {
-    padding: 10px;
-}
-.switch {
-    position: relative;
-    width: 60px;
-    height: 30px;
-    display: flex;
-    float: right;
-    margin: 30px 40px 0 0;
-}
-.toggle-switch {
-    width: 0;
-    height: 0;
-    opacity: 0;
-}
-.slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -o-transition: 0.4s;
-    transition: 0.4s;
-    background-color: var(--purple-secondary);
-    border-radius: 30px;
-    cursor: pointer;
-}
-
-.slider:before {
-    content: "";
-    position: absolute;
-    height: 24px;
-    width: 24px;
-    left: 4px;
-    bottom: 0.2em;
-    background-color: var(--purple-principal);
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -o-transition: 0.4s;
-    transition: 0.4s;
-    border-radius: 50%;
-}
-
-.toggle-switch:checked + .slider {
-    background-color: var(--black-secondary);
-}
-
-.toggle-switch:focus + .slider {
-    box-shadow: 0 0 5px var(--black-secondary);
-}
-
-.toggle-switch:checked + .slider:before {
-    transform: translateX(1.8em);
-    background-color: var(--orange);
-}
-
-.title {
-    margin: 30px 0 0 40px;
-    display: flex;
-    flex-direction: column;
-    margin: 40px auto 10px;
+.box{
     width: 300px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #191919;
+    text-align: center;
 }
-.title h1 {
-    color: var(--orange);
-    font-size: 2.5em;
-}
-.title h3 {
+.box h1{
     color: white;
+    text-transform: uppercase;
+    font-weight: 500;
 }
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    justify-content: center;
-    background-color: var(--purple-secondary);
-    width: 25em;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-}
-
-.form-group-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.form-group-info h3 {
-    padding: 20px 10px 10px;
-    cursor: pointer;
-}
-
-.form-group-info .sign-in-btn-tab {
-    color: var(--purple-white-text);
-}
-.form-group-info .sign-up-btn-tab {
-    color: var(--purple-tertiary);
-}
-
-.sign-in-tab {
-}
-
-.sign-up-tab {
-    display: none;
-}
-
-.sign-in-tab,
-.sign-up-tab {
-    transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-.sign-in-tab form,
-.sign-up-tab form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    margin: auto;
-}
-
-.sign-in-tab form input,
-.sign-up-tab form input {
-    padding: 10px 5px 10px 10px;
-    margin: 10px;
-    width: 100%;
-    border-radius: 30px;
-    border: none;
+.box input[type = "text"],.box input[type = "password"]{
+    border:0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
     outline: none;
-    background-color: var(--purple-principal);
-    font-size: 1em;
-    font-weight: bold;
     color: white;
+    border-radius: 24px;
+    transition: 0.25s;
 }
-
-.sign-in-tab form input::placeholder,
-.sign-up-tab form input::placeholder {
-    color: var(--purple-tertiary);
-    font-size: 1em;
-    font-weight: bold;
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+    width: 280px;
+    border-color: #2ecc71;
 }
-
-.sign-in-tab .btn-sign-in,
-.sign-up-tab .btn-sign-up {
-    width: 100%;
-    border-radius: 30px;
-    border: none;
+.box input[type = "submit"]{
+    border:0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
     outline: none;
-    background-color: var(--orange);
     color: white;
-    padding: 10px 8px;
-    margin: 5px 0 25px;
+    border-radius: 24px;
+    transition: 0.25s;
     cursor: pointer;
-    cursor: pointer;
-    transition: .5s;
+}
+.box input[type = "submit"]:hover{
+    background: #2ecc71;
 }
 
-.btn-sign-up:hover{
-  background-position: right;
-}
-
-.forget-password {
+.para-2 {
+    text-align: center;
     color: white;
-    margin: 10px 10px 20px;
-    font-weight: 100px;
-    cursor: pointer;
-    transition: color 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 15px;
+    margin-top: -10px;
 }
-
-.forget-password:hover {
-    color: var(--purple-principal);
+.para-2 a {
+    color: #49c1a2;
 }

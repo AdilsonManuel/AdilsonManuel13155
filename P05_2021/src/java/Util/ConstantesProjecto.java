@@ -18,5 +18,5 @@ public interface ConstantesProjecto
     public static final int FUNCIONARIO = ADMIN + 1;
     public static final int CLIENTE_CADASTRADO = FUNCIONARIO + 1;
     public static final int CLIENTE_ANONIMO = CLIENTE_CADASTRADO + 1;
-
+    public static String CADASTRAR_CLIENTE = "CADASTRAR_CLIENTE";
 }

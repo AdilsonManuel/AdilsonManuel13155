@@ -23,7 +23,7 @@ public class PaisDAO
 
     private Connection conexaoBD;
 
-    public PaisDAO () throws ClassNotFoundException
+    public PaisDAO () throws ClassNotFoundException , SQLException
     {
         conexaoBD = new ConexaoBD ().getConnection ();
     }
@@ -85,6 +85,26 @@ public class PaisDAO
             pst.close ();
             return listaPais;
         }
+    }
+
+    public PaisModelo getDadosPais (int pais_pk) throws SQLException
+    {
+        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.pais WHERE pais_pk="+pais_pk))
+        {
+            PaisModelo paisModelo = new PaisModelo ();
+            ResultSet rs = pst.executeQuery ();
+            rs.next ();
+            
+            if (rs.getInt (1) > 0)
+            {
+               paisModelo.setPaisPK (rs.getInt ("pais_pk"));
+               paisModelo.setNome (rs.getString ("nome"));
+               
+               return paisModelo;
+            }
+
+        }
+        return null;
     }
 
     public boolean alterarPais (PaisModelo paisModelo) throws SQLException

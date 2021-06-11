@@ -5,6 +5,8 @@
  */
 package DAO;
 
+import Modelo.ClienteModelo;
+import Modelo.PessoaModelo;
 import Modelo.ContaModelo;
 import Modelo.PessoaModelo;
 import java.sql.SQLException;
@@ -17,33 +19,33 @@ import java.util.List;
 public class TesteDAO
 {
 
-    public static void main (String[] args) throws SQLException, ClassNotFoundException
+    public static void main (String[] args) throws SQLException , ClassNotFoundException
     {
-//        PessoaModelo pessoaModelo = new PessoaModelo ();
-//        PessoaDAO pessoaDAO = new PessoaDAO ();
+        PessoaModelo PessoaModelo = new PessoaModelo ();
+        PessoaDAO pessoaDAO = new PessoaDAO ();
+//        System.out.println ("DAO.TesteDAO.main()"+pessoaDAO.getUltimaPessoa ());
 
-//        pessoaModelo.setNome ("João Pedro");
-//        pessoaModelo.setData_nascimento ("13/02/2006");
-//        pessoaModelo.setSexo_fk (1);
-//        pessoaModelo.setEstado_civil_fk (1);
-//        pessoaModelo.setEndereco_fk (1);
-//        pessoaModelo.setTelefone_fk (3);
-//        pessoaModelo.setEmail_fk (1);
+//        PessoaModelo.setNome ("João Pedro");
+//        PessoaModelo.setData_nascimento ("13/02/2006");
+//        PessoaModelo.setSexo_fk (1);
+//        PessoaModelo.setEstado_civil_fk (1);
+//        PessoaModelo.setEndereco_fk (1);
+//        PessoaModelo.setTelefone_fk (3);
+//        PessoaModelo.setEmail_fk (1);
 //
-//        pessoaDAO.inserirPessoa (pessoaModelo);
-        
+//        pessoaDAO.inserirPessoa (PessoaModelo);
 //        List<PessoaModelo> lista = pessoaDAO.getListaPessoa ();
 //        
-//        for (PessoaModelo pessoaModelo1 : lista)
+//        for (PessoaModelo PessoaModelo1 : lista)
 //        {
-//            System.out.println ("ID -> " + pessoaModelo1.getPessoa_pk ());
-//            System.out.println ("Nome -> " + pessoaModelo1.getNome () );
-//            System.out.println ("Data de nascimento -> " + pessoaModelo1.getData_nascimento ());
-//            System.out.println ("Sexo ->" + pessoaModelo1.getSexo_fk ());
-//            System.out.println ("Estado civil -> " + pessoaModelo1.getEstado_civil_fk ());
-//            System.out.println ("Endereco ->" + pessoaModelo1.getEndereco_fk ());
-//            System.out.println ("Telefone ->" + pessoaModelo1.getTelefone_fk () );
-//            System.out.println ("Email ->" + pessoaModelo1.getEmail_fk ());
+//            System.out.println ("ID -> " + PessoaModelo1.getPessoa_pk ());
+//            System.out.println ("Nome -> " + PessoaModelo1.getNome () );
+//            System.out.println ("Data de nascimento -> " + PessoaModelo1.getData_nascimento ());
+//            System.out.println ("Sexo ->" + PessoaModelo1.getSexo_fk ());
+//            System.out.println ("Estado civil -> " + PessoaModelo1.getEstado_civil_fk ());
+//            System.out.println ("Endereco ->" + PessoaModelo1.getEndereco_fk ());
+//            System.out.println ("Telefone ->" + PessoaModelo1.getTelefone_fk () );
+//            System.out.println ("Email ->" + PessoaModelo1.getEmail_fk ());
 //                    
 //        }
 //        
@@ -63,17 +65,39 @@ public class TesteDAO
 //            
 //            System.out.println ("ID -> " +pai.getPaisPK () + " - "+ " Nome do pais -> " + pai.getNome ());
 //        }
-        
         ContaModelo contaModelo = new ContaModelo ();
-        contaModelo.setTipo_conta_fk (4);
-        contaModelo.setNomeUsuario ("clienteAnonimo");
-        contaModelo.setSenha_usuario ("clienteAnonimo");
-        
+//        contaModelo.setTipo_conta_fk (4);
+//        contaModelo.setNomeUsuario ("clienteAnonimo");
+//        contaModelo.setSenha_usuario ("clienteAnonimo");
+//        
         ContaDAO contaDAO = new ContaDAO ();
-        
-//        contaDAO.inserirConta (contaModelo);
-//        System.out.println (contaModelo.toString ());
-        System.out.println (contaDAO.getIDconta ("clienteAnonimo", "clienteAnonimo"));
-                
+//        
+//        contaDAO.getIDconta ("root","root");
+//        System.out.println (contaDAO.getIDconta ("root" , "root");
+//        System.out.println (contaDAO.getIDconta ("root", "root"));
+//        PessoaModelo PessoaModelo = new PessoaModelo ();
+//        PessoaModelo.setNome ("Aida Amaral");
+//        PessoaModelo.setData_nascimento ("05/10/2000");
+//        PessoaModelo.setSexo_fk (2);
+//        PessoaModelo.setEstado_civil_fk (2);
+//        PessoaModelo.setEndereco_fk (2);
+//        PessoaModelo.setTelefone_fk (1);
+//        PessoaModelo.setEmail_fk (3);
+//        pessoaDAO.inserirPessoa (PessoaModelo);
+//        System.out.println ("Pessoa modelo ->" + PessoaModelo.toString ());
+        ClienteModelo clienteModelo = new ClienteModelo ();
+        ClienteDAO clienteDAO = new ClienteDAO ();
+//        clienteDAO.inserirCliente (PessoaModelo);
+
+//        System.out.println ("DAO.TesteDAO.main()"+PessoaModelo.toString ());
+//        List<ClienteModelo> cliente = clienteDAO.getListaCliente ();
+////
+//        for (ClienteModelo PessoaModelo1 : cliente)
+//        {
+//            System.out.println ("ID cliente-> " + PessoaModelo1.getCliente_pk ());
+//            System.out.println ("ID pessoa -> " + PessoaModelo1.getPessoa_fk ());
+//
+//
+//        }
     }
 }

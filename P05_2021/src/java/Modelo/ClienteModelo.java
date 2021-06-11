@@ -6,15 +6,22 @@
 package Modelo;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author azm
  */
 @Data
-public class ClienteModelo
+@EqualsAndHashCode(callSuper=false)
+public class ClienteModelo extends PessoaModelo
 {
+    private int pessoa_fk;
+    private int cliente_pk;
+    
 
-    private Integer cliente_pk;
-    private Integer pessoa_fk;
+    public ClienteModelo ()
+    {
+    }
+
 }

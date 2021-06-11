@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>.:Aplicação web da IMOB Sells:. Apresentação</title>
+        <title>IMOB Sells</title>
         <script type="text/javascript" src="js/jquery.js"></script>
         <link rel = "stylesheet" type = "text/css" href = "css/apresentacao.css"/>
         <link rel="icon" href="assets/logo.png">

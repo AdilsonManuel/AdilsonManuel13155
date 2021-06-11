@@ -9,6 +9,7 @@ import DAO.ContaDAO;
 import Util.ConstantesProjecto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -23,16 +24,9 @@ import javax.swing.JOptionPane;
  *
  * @author azm
  */
-//@WebServlet(name = "ContaServlet" , urlPatterns = "/ServLet/ContaServlet")
+@WebServlet(name = "ContaServlet" , urlPatterns = "/ServLet/ContaServlet")
 public class ContaServlet extends HttpServlet
 {
-
-    private final ContaDAO contaDAO;
-
-    public ContaServlet (ContaDAO contaDAO)
-    {
-        this.contaDAO = contaDAO;
-    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,17 +38,19 @@ public class ContaServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest (HttpServletRequest request , HttpServletResponse response)
-            throws ServletException , IOException , ClassNotFoundException
+            throws ServletException , IOException , ClassNotFoundException , SQLException
     {
+        ContaDAO contaDAO = new ContaDAO ();
+        response.setContentType ("text/html;charset=UTF-8");
         HttpSession session = request.getSession ();
+
         try (PrintWriter out = response.getWriter ())
         {
             String nome_usuario = request.getParameter ("nome_usuario");
             String senha_usuario = request.getParameter ("senha_usuario");
-//            String operacao = request.getParameter ("operacao");
 
             int tipo_conta = contaDAO.getIDconta (nome_usuario , senha_usuario);
-
+//            JOptionPane.showMessageDialog (null, tipo_conta + "/ " + nome_usuario + "/" + senha_usuario);
             if (tipo_conta != ConstantesProjecto.INVALID)
             {
                 if (tipo_conta == ConstantesProjecto.ROOT)
@@ -112,6 +108,10 @@ public class ContaServlet extends HttpServlet
         {
             Logger.getLogger (ContaServlet.class.getName ()).log (Level.SEVERE , null , ex);
         }
+        catch (SQLException ex)
+        {
+            Logger.getLogger (ContaServlet.class.getName ()).log (Level.SEVERE , null , ex);
+        }
     }
 
     /**
@@ -131,6 +131,10 @@ public class ContaServlet extends HttpServlet
             processRequest (request , response);
         }
         catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger (ContaServlet.class.getName ()).log (Level.SEVERE , null , ex);
+        }
+        catch (SQLException ex)
         {
             Logger.getLogger (ContaServlet.class.getName ()).log (Level.SEVERE , null , ex);
         }

@@ -23,7 +23,7 @@ public class PessoaDAO
 
     private Connection conexaoBD;
 
-    public PessoaDAO () throws ClassNotFoundException
+    public PessoaDAO () throws ClassNotFoundException , SQLException
     {
         conexaoBD = new ConexaoBD ().getConnection ();
     }
@@ -103,22 +103,26 @@ public class PessoaDAO
 
     public boolean alterarPessoa (PessoaModelo pessoaModelo) throws SQLException
     {
-        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("UPDATE public.pessoa SET nome=?, data_nascimento=?, sexo_fk=?, estado_civil_fk=?, "
-                + "                                                     endereco_fk=?, telefone_fk=?, email_fk=? WHERE pessoa_pk=?"))
+        if (pessoaModelo != null)
         {
-            pst.setString (1 , pessoaModelo.getNome ());
-            pst.setString (2 , pessoaModelo.getData_nascimento ());
-            pst.setInt (3 , pessoaModelo.getSexo_fk ());
-            pst.setInt (4 , pessoaModelo.getEstado_civil_fk ());
-            pst.setInt (5 , pessoaModelo.getEndereco_fk ());
-            pst.setInt (6 , pessoaModelo.getTelefone_fk ());
-            pst.setInt (7 , pessoaModelo.getEmail_fk ());
-            pst.setInt (8 , pessoaModelo.getPessoa_pk ());
+            try (PreparedStatement pst = this.conexaoBD.prepareStatement ("UPDATE public.pessoa SET nome=?, data_nascimento=?, sexo_fk=?, estado_civil_fk=?, "
+                    + "                                                     endereco_fk=?, telefone_fk=?, email_fk=? WHERE pessoa_pk=?"))
+            {
+                pst.setString (1 , pessoaModelo.getNome ());
+                pst.setString (2 , pessoaModelo.getData_nascimento ());
+                pst.setInt (3 , pessoaModelo.getSexo_fk ());
+                pst.setInt (4 , pessoaModelo.getEstado_civil_fk ());
+                pst.setInt (5 , pessoaModelo.getEndereco_fk ());
+                pst.setInt (6 , pessoaModelo.getTelefone_fk ());
+                pst.setInt (7 , pessoaModelo.getEmail_fk ());
+                pst.setInt (8 , pessoaModelo.getPessoa_pk ());
 
-            pst.execute ();
-            pst.close ();
-            return true;
+                pst.execute ();
+                pst.close ();
+                return true;
+            }
         }
+        return false;
     }
 
     public boolean eliminarPessoa (PessoaModelo pessoaModelo) throws SQLException
@@ -130,6 +134,17 @@ public class PessoaDAO
             pst.execute ();
             pst.close ();
             return true;
+        }
+    }
+    
+    public int getUltimaPessoa () throws SQLException
+    {
+        try ( PreparedStatement pst = conexaoBD.prepareStatement ("SELECT MAX(public.pessoa.pessoa_pk) FROM public.pessoa"))
+        {
+            ResultSet rs = pst.executeQuery ();
+            rs.next ();
+            
+            return rs.getInt (1);
         }
     }
 }

@@ -25,12 +25,12 @@ public class ContaDAO
     private Connection conexaoBD;
     private ContaModelo contaModelo;
 
-    public ContaDAO () throws ClassNotFoundException
+    public ContaDAO () throws ClassNotFoundException, SQLException
     {
         conexaoBD = new ConexaoBD ().getConnection ();
     }
 
-    public static int getIDconta (String userName , String password) throws ClassNotFoundException
+    public static int getIDconta (String userName , String password) throws ClassNotFoundException, SQLException
     {
         ContaDAO contaDAO = new ContaDAO ();
         ResultSet rs = contaDAO.getRegisto (userName , password);
@@ -53,7 +53,7 @@ public class ContaDAO
         return 0;
     }
 
-    public static int validarConta (String userName , String password) throws ClassNotFoundException
+    public static int validarConta (String userName , String password) throws ClassNotFoundException, SQLException
     {
         ContaDAO contaDAO = new ContaDAO ();
         ResultSet rs = contaDAO.getRegisto (userName , password);

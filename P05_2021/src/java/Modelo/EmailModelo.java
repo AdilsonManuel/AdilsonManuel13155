@@ -12,14 +12,8 @@ import lombok.Data;
  * @author azm
  */
 @Data
-public class PaisModelo
+public class EmailModelo
 {
-
-    private int paisPK;
-    private String nome;
-
-    public PaisModelo ()
-    {
-    }
-
+    private int email_pk;
+    private String dominio;
 }

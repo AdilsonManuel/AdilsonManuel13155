@@ -63,10 +63,11 @@
                         </li>
                         <li><a class="nav-link scrollto" href="#about">Sobre</a></li>
                         <li><a class="nav-link scrollto" href="cliente.jsp">Clientes</a></li>
-                        <li>
-                            <a class="nav-link scrollto" href="medico.jsp">Departamentos</a>
-                        </li>
-                        <li><a class="nav-link scrollto" href="#doctors">Medicos</a></li>
+                        <li><a class="nav-link scrollto" href="correctores.jsp">Corrector</a></li>
+                        <li><a class="nav-link scrollto" href="proprietarios.jsp">Proprietarios</a></li>
+                        <li><a class="nav-link scrollto" href="fiadores.jsp">Fiadores</a></li>
+                        <li><a class="nav-link scrollto" href="imoveis.jsp">Imoveis</a></li>
+                        <li><a class="nav-link scrollto" href="vendas.jsp">Vendas</a></li>
                         <li class="dropdown">
                             <a href="#"><span>Tabelas</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
@@ -109,14 +110,14 @@
                     <!-- Slide 1 -->
                     <div class="carousel-item active" style="background-image: url(assets/home/slide/slide01.jpg)">
                         <div class="container">
-                            <h2>Bem-vindo a <span>Consulta UCAN</span></h2>
+                            <h2>Bem-vindo a <span>IMOB Sells</span></h2>
                             <p>
-                                A sua saúde num só lugar. Se você está a fazer seu check-up
-                                anual ou simplesmente à procura que algumas perguntas sejam
-                                respondidas, o Medicio Center é seu consultor de saúde local.
-                                Estamos aqui para o guiar e para guiar os seus familiares
-                                através de cada etapa do processo, não importando a razão que o
-                                traz ao nosso hospital.
+                                Somos uma Agência de Gestão, Mediação e Angariação Imobiliária, que atua no mercado angolano desde 2011,
+                                atendendo rigorosamente as necessidades dos nossos clientes e oferecendo a quem nos procura um serviço
+                                referenciado com seriedade e profissionalismo. Colaboramos com Agências parceiras, Construtoras,
+                                Promotoras do mercado imobiliário angolano, além de pessoas físicas e jurídicas, que nos procuram através da mídia.
+                                Primamos por um serviço credível, fornecemos informações importantes sobre cuidados e procedimentos para compra, 
+                                vender ou arrendamento de um Imóvel, passando confiança e agilidade em qualquer tipo de transação imobiliária efetuada por nós.
                             </p>
                             <a href="#about" class="btn-get-started scrollto">Leia Mais</a>
                         </div>
@@ -125,14 +126,10 @@
                     <!-- Slide 2 -->
                     <div class="carousel-item" style="background-image: url(assets/home/slide/slide02.jpg)">
                         <div class="container">
-                            <h2>Diagnóstico e tratamento mais rápidos</h2>
+                            <h2>Visão</h2>
                             <p>
-                                O Médico Assistente Medicio Center foi criado para me ajudar a
-                                prevenir doenças e a ter um diagnóstico e tratamento mais
-                                rápidos. Posso evitar muitas viagens às urgências se falar
-                                primeiro com o meu Médico Assistente Médis. Conversando com ele,
-                                é mais fácil perceber quando preciso realmente de ajuda médica
-                                imediata.
+                                Ser uma empresa fiável e comoda em qualquer negócio oferecido aos nossos clientes. 
+                                Ser uma referência a nível do mercado Angolano e preferência no que tange a negócios imobiliários.
                             </p>
                             <a href="#about" class="btn-get-started scrollto">Leia Mais</a>
                         </div>
@@ -141,12 +138,11 @@
                     <!-- Slide 3 -->
                     <div class="carousel-item" style="background-image: url(assets/home/slide/slide03.jpg)">
                         <div class="container">
-                            <h2>Como posso aceder o Medicio Center assistente?</h2>
+                            <h2>Missão</h2>
                             <p>
-                                Aceda ao menu Perfil, dentro da área de cliente Médis, e escolha
-                                o Médico Assistente. Pode também ligar para a Linha Médis. Há
-                                mais de 280 Médicos Assistentes Médis distribuídos a nível
-                                nacional, para que possa escolher o mais próximo de si.
+                                Oferecer produtos e serviços de Gestão Imobiliária com excelência, fornecendo soluções de 
+                                relações duradouras aos nossos clientes, valorizando toda a colaboração e parceria que elevem
+                                o nosso crescimento da MCSMVC
                             </p>
                             <a href="#about" class="btn-get-started scrollto">Leia Mais</a>
                         </div>

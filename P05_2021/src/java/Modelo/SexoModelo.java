@@ -12,14 +12,14 @@ import lombok.Data;
  * @author azm
  */
 @Data
-public class PaisModelo
+public class SexoModelo
 {
-
-    private int paisPK;
+    private int sexo_pk;
     private String nome;
 
-    public PaisModelo ()
+    public SexoModelo ()
     {
     }
-
+    
+    
 }

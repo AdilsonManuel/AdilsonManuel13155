@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class ConexaoBD
 {
-    public Connection getConnection() throws ClassNotFoundException
+    public Connection getConnection() throws ClassNotFoundException,SQLException
     {
         try
         {

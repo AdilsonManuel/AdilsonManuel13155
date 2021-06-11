@@ -5,16 +5,16 @@
         <servlet-class>ServLet.ContaServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ContaServlet</servlet-name>
-        <servlet-class>ServLet.ContaServlet</servlet-class>
+        <servlet-name>ClienteServlet</servlet-name>
+        <servlet-class>ServLet.ClienteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ContaServlet</servlet-name>
         <url-pattern>/ContaServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ContaServlet</servlet-name>
-        <url-pattern>/ContaServlet</url-pattern>
+        <servlet-name>ClienteServlet</servlet-name>
+        <url-pattern>/ClienteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
