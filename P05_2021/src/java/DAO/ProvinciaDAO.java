@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import Util.ConexaoBD;
+import Util.HtmlComboBoxes;
 import util.Mensagens;
 
 /**
@@ -24,7 +25,7 @@ public class ProvinciaDAO
 
     private Connection conexsBD;
 
-    public ProvinciaDAO () throws ClassNotFoundException, SQLException
+    public ProvinciaDAO () throws ClassNotFoundException , SQLException
     {
         this.conexsBD = new ConexaoBD ().getConnection ();
     }
@@ -74,7 +75,7 @@ public class ProvinciaDAO
         }
     }
 
-    public List<ProvinciaModelo> pesquisarProvinciaPK (int provinciaPK) throws SQLException, ClassNotFoundException
+    public List<ProvinciaModelo> pesquisarProvinciaPK (int provinciaPK) throws SQLException , ClassNotFoundException
     {
         try (PreparedStatement pst = this.conexsBD.prepareStatement ("SELECT * FROM public.provincia WHERE provincia_pk=? ORDER BY provincia_pk ASC"))
         {
@@ -99,7 +100,7 @@ public class ProvinciaDAO
 
         }
     }
-    
+
     public ProvinciaModelo getDadosProvincia (int provincia_pk) throws SQLException , ClassNotFoundException
     {
         try (PreparedStatement pst = this.conexsBD.prepareStatement ("SELECT * FROM public.provincia WHERE provincia_pk=" + provincia_pk))
@@ -159,30 +160,20 @@ public class ProvinciaDAO
 
     }
 
-//    public String gerarComboBox (String nomeCombo , String nomeForm , String valorSelecionado) throws Exception
-//    {
-//        HtmlComboBoxes hcb = new HtmlComboBoxes ();
-//        return hcb.select ("pais" , nomeForm , nomeCombo , "codigo" ,
-//                "descricao" , "" , valorSelecionado);
-//    }
-//
-//    /**
-//     *
-//     * @param nomeCombo nome da combobox no formulário
-//     * @param nomeForm nome do formulário onde a combobox está inserida
-//     * @param nomeComboSeguinte nome da combobox seguinte que será afectada
-//     * @param valorSelecionado
-//     * @return
-//     * @throws Exception
-//     */
-//    public String gerarComboBoxComEvento (String nomeCombo , String nomeForm , String nomeComboSeguinte , String valorSelecionado) throws Exception
-//    {
-//        HtmlComboBoxes hcb = new HtmlComboBoxes ();
-//        String ncs = nomeComboSeguinte;
-//        return hcb.select ("pais" , nomeForm , nomeCombo , "codigo" , "descricao" ,
-//                "onChange=\"javascript: "
-//                + "selectChange('" + nomeCombo + "', '" + ncs
-//                + "', " + ncs + "Text, " + ncs
-//                + "Relac, " + ncs + "Value);\"" , valorSelecionado);
-//    }
+    public String gerarComboProvincias (String form , String codigo , String valorSeleccionado) throws Exception
+    {
+
+        return new HtmlComboBoxes ().selectDependente ("Provincia" , form , "cboprovincia" + codigo , "cboPais" + codigo ,
+                "cboprovincia" + codigo , "provincia_pk" , "nome" , "pais_fk" , "" , valorSeleccionado);
+    }
+
+    public String gerarComboProvinciascomEvento (String form , String codigo , String valorSeleccionado , String nomeComboSeguinte) throws Exception
+    {
+
+        return new HtmlComboBoxes ().selectDependente ("Provincia" , form , "cboprovincia" + codigo , "cboPais" + codigo ,
+                "cboprovincia" + codigo , "provincia_pk" , "nome" , "pais_fk" , "onChange=\"javascript: "
+                + "selectChange('cboprovincia" + codigo + "', '" + nomeComboSeguinte
+                + "', " + nomeComboSeguinte + "Text, " + nomeComboSeguinte
+                + "Relac, " + nomeComboSeguinte + "Value);\"" , valorSeleccionado);
+    }
 }

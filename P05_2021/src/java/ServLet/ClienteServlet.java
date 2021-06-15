@@ -15,7 +15,6 @@ import DAO.PessoaDAO;
 import DAO.SexoDAO;
 import DAO.TelefoneDAO;
 import Modelo.ClienteModelo;
-import Modelo.ComunaModelo;
 import Modelo.ContaModelo;
 import Modelo.EmailModelo;
 import Modelo.EnderecoModelo;

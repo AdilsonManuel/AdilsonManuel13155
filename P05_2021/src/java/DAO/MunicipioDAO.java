@@ -7,6 +7,7 @@ package DAO;
 
 import Modelo.MunicipioModelo;
 import Util.ConexaoBD;
+import Util.HtmlComboBoxes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +25,7 @@ public class MunicipioDAO
 
     private Connection conexaoBD;
 
-    public MunicipioDAO () throws ClassNotFoundException, SQLException
+    public MunicipioDAO () throws ClassNotFoundException , SQLException
     {
 
         this.conexaoBD = new ConexaoBD ().getConnection ();
@@ -154,30 +155,40 @@ public class MunicipioDAO
      * @return
      * @throws Exception
      */
-//    public String gerarComboBox (String nomeCombo , String nomeForm , String valorSelecionado) throws Exception
-//    {
-//        HtmlComboBoxes hcb = new HtmlComboBoxes ();
-//        return hcb.select ("pais" , nomeForm , nomeCombo , "codigo" ,
-//                "descricao" , "" , valorSelecionado);
-//    }
-//
-//    /**
-//     *
-//     * @param nomeCombo nome da combobox no formulário
-//     * @param nomeForm nome do formulário onde a combobox está inserida
-//     * @param nomeComboSeguinte nome da combobox seguinte que será afectada
-//     * @param valorSelecionado
-//     * @return
-//     * @throws Exception
-//     */
-//    public String gerarComboBoxComEvento (String nomeCombo , String nomeForm , String nomeComboSeguinte , String valorSelecionado) throws Exception
-//    {
-//        HtmlComboBoxes hcb = new HtmlComboBoxes ();
-//        String ncs = nomeComboSeguinte;
-//        return hcb.select ("pais" , nomeForm , nomeCombo , "codigo" , "descricao" ,
-//                "onChange=\"javascript: "
-//                + "selectChange('" + nomeCombo + "', '" + ncs
-//                + "', " + ncs + "Text, " + ncs
-//                + "Relac, " + ncs + "Value);\"" , valorSelecionado);
-//    }
+    public String gerarComboBox (String nomeCombo , String nomeForm , String valorSelecionado) throws Exception
+    {
+        HtmlComboBoxes hcb = new HtmlComboBoxes ();
+        //nome do arrayJavascript
+        //ex: nomeCombo+Text
+        //ex: nomeCombo+Relac
+        //ex: nomeCombo+Value
+        return hcb.selectDependente ("municipio" , nomeForm , nomeCombo ,
+                "comboProvincia" , nomeCombo , "municipio_pk" , "nome" ,
+                "provincia_fk" , "" , valorSelecionado);
+    }
+
+    /**
+     *
+     * @param nomeCombo nome da combobox no formulário
+     * @param nomeForm nome do formulário onde a combobox está inserida
+     * @param nomeComboSeguinte nome da combobox seguinte que será afectada
+     * @param valorSelecionado
+     * @return
+     * @throws Exception
+     */
+    public String gerarComboBoxComEvento (String nomeCombo , String nomeForm , String nomeComboSeguinte , String valorSelecionado) throws Exception
+    {
+        HtmlComboBoxes hcb = new HtmlComboBoxes ();
+        String ncs = nomeComboSeguinte;
+        //nome do arrayJavascript
+        //ex: nomeCombo+Text
+        //ex: nomeCombo+Relac
+        //ex: nomeCombo+Value
+        return hcb.selectDependente ("municipio" , nomeForm , nomeCombo ,
+                "comboProvincia" , nomeCombo , "municipio_pk" , "nome" ,
+                "provincia_fk" , "onChange=\"javascript: "
+                + "selectChange('" + nomeCombo + "', '" + ncs
+                + "', " + ncs + "Text, " + ncs
+                + "Relac, " + ncs + "Value);\"" , valorSelecionado);
+    }
 }

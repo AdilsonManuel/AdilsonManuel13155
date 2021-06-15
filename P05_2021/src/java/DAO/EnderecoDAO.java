@@ -160,7 +160,7 @@ public class EnderecoDAO
         try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT endereco_pk FROM public.endereco WHERE = " + numero_casa))
         {
             ResultSet rs = pst.executeQuery ();
-            
+
             if (rs.getInt (1) != 0)
             {
                 return rs.getInt ("endereco_pk");
@@ -168,4 +168,14 @@ public class EnderecoDAO
         }
         return 0;
     }
+
+    public EnderecoModelo lerRegisto (ResultSet rs) throws SQLException , ClassNotFoundException
+    {
+        EnderecoModelo registo = new EnderecoModelo ();
+
+        registo.setComunaModelo (new ComunaDAO ().getDadosComuna (rs.getInt ("comuna_fk")));
+
+        return registo;
+    }
+
 }

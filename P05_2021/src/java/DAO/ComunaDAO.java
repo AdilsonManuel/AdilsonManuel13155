@@ -7,6 +7,7 @@ package DAO;
 
 import Modelo.ComunaModelo;
 import Util.ConexaoBD;
+import Util.HtmlComboBoxes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +25,7 @@ public class ComunaDAO
 
     private final Connection conexaoBD;
 
-    public ComunaDAO () throws ClassNotFoundException, SQLException
+    public ComunaDAO () throws ClassNotFoundException , SQLException
     {
         this.conexaoBD = new ConexaoBD ().getConnection ();
     }
@@ -93,7 +94,7 @@ public class ComunaDAO
         return null;
     }
 
-    public List<ComunaModelo> getListaComunaPK (int comunaPK) throws SQLException, ClassNotFoundException
+    public List<ComunaModelo> getListaComunaPK (int comunaPK) throws SQLException , ClassNotFoundException
     {
         try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.comuna WHERE comuna_pk=? ORDER BY comuna_pk ASC"))
         {
@@ -145,5 +146,40 @@ public class ComunaDAO
             pst.close ();
             return true;
         }
+    }
+
+    /**
+     *
+     * @param nomeCombo nome da combobox no formulário
+     * @param nomeForm nome do formulário onde a combobox está inserida
+     * @param nomeComboSeguinte nome da combobox seguinte que será afectada
+     * @param valorSelecionado
+     * @return
+     * @throws Exception
+     */
+    public String gerarComboBoxComEvento (String nomeCombo , String nomeForm , String nomeComboSeguinte , String valorSelecionado) throws Exception
+    {
+        HtmlComboBoxes hcb = new HtmlComboBoxes ();
+        String ncs = nomeComboSeguinte;
+        //nome do arrayJavascript
+        //ex: nomeCombo+Text
+        //ex: nomeCombo+Relac
+        //ex: nomeCombo+Value
+        return hcb.selectDependente ("comuna" , nomeForm , nomeCombo ,
+                "comboMunicipio" , nomeCombo , "comuna_pk" , "nome" ,
+                "municipio_fk" , "onChange=\"javascript: "
+                + "selectChange('" + nomeCombo + "', '" + ncs
+                + "', " + ncs + "Text, " + ncs
+                + "Relac, " + ncs + "Value);\"" , valorSelecionado);
+    }
+
+    public ComunaModelo lerRegisto (ResultSet rs) throws SQLException
+    {
+        ComunaModelo registo = new ComunaModelo ();
+
+        registo.setComuna_pk (rs.getInt ("comuna_pk"));
+        registo.setNome (rs.getString ("nome"));
+
+        return registo;
     }
 }
