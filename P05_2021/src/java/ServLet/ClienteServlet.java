@@ -11,7 +11,10 @@ import DAO.ContaDAO;
 import DAO.EmailDAO;
 import DAO.EnderecoDAO;
 import DAO.EstadoCivilDAO;
+import DAO.MunicipioDAO;
+import DAO.PaisDAO;
 import DAO.PessoaDAO;
+import DAO.ProvinciaDAO;
 import DAO.SexoDAO;
 import DAO.TelefoneDAO;
 import Modelo.ClienteModelo;
@@ -19,7 +22,10 @@ import Modelo.ContaModelo;
 import Modelo.EmailModelo;
 import Modelo.EnderecoModelo;
 import Modelo.EstadoCivilModelo;
+import Modelo.MunicipioModelo;
+import Modelo.PaisModelo;
 import Modelo.PessoaModelo;
+import Modelo.ProvinciaModelo;
 import Modelo.SexoModelo;
 import Modelo.TelefoneModelo;
 import Util.ConstantesProjecto;
@@ -72,6 +78,9 @@ public class ClienteServlet extends HttpServlet
                 TelefoneDAO telefoneDAO = new TelefoneDAO ();
                 EmailDAO emailDAO = new EmailDAO ();
                 PessoaDAO pessoaDAO = new PessoaDAO ();
+                MunicipioDAO municipioDAO = new MunicipioDAO ();
+                ProvinciaDAO provinciaDAO = new ProvinciaDAO ();
+                PaisDAO paisDAO = new PaisDAO ();
 
                 /*Modelo*/
                 ContaModelo contaModelo = new ContaModelo ();
@@ -82,6 +91,10 @@ public class ClienteServlet extends HttpServlet
                 EmailModelo emailModelo = new EmailModelo ();
                 PessoaModelo pessoaModelo = new PessoaModelo ();
                 ClienteModelo clienteModelo = new ClienteModelo ();
+                PaisModelo paisModelo = new PaisModelo ();
+                ProvinciaModelo provinciaModelo = new ProvinciaModelo ();
+                MunicipioModelo municipioModelo = new MunicipioModelo ();
+                
 
                 String nome_usuario = request.getParameter ("nome_usuario");
                 String senha_usuario = request.getParameter ("senha_usuario");
