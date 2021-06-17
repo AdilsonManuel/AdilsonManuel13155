@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="css/bootstrap-5.0.0-dist/css/bootstrap.css">
         <script language="javascript" src="js/repopularCombo.js"></script>
         <script language="javascript" src="js/direccionadorServlet.js"></script>
+        <script language="javascript" src="js/direccionadorServlet_1.js"></script>
         <script type="text/javascript" >
             $(function () {
                 $('.datepicker').datepicker({
@@ -184,7 +185,9 @@
                 <input
                     type="button"
                     class="btn btn-success"
-                    value="cadastrar"
+                    name="gravar"
+                    id="gravar"
+                    value="GRAVAR"
                     onclick="direccionar('clienteForm', 'ClienteServlet', 1, 0)"
                     />
                 <button type="reset" class="btn btn-primary-outline">

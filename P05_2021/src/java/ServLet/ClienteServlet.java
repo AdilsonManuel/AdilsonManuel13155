@@ -39,6 +39,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -158,13 +159,15 @@ public class ClienteServlet extends HttpServlet
                 pessoaModelo.setSexo_fk (sexo_fk);
                 pessoaModelo.setTelefone_fk (telefone_fk);
 
+                JOptionPane.showMessageDialog (null, pessoaModelo.toString ());
                 pessoaDAO.inserirPessoa (pessoaModelo);
 
                 int pessoa_fk = pessoaDAO.getUltimaPessoa ();
-
+ 
                 clienteModelo.setPessoa_fk (pessoa_fk);
                 clienteDAO.inserirCliente (clienteModelo);
-
+                
+               
             }
         }
     }
