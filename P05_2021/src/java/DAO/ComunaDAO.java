@@ -152,6 +152,21 @@ public class ComunaDAO
      *
      * @param nomeCombo nome da combobox no formulário
      * @param nomeForm nome do formulário onde a combobox está inserida
+     * @param valorSelecionado
+     * @return
+     * @throws Exception
+     */
+    public String gerarComboBox (String nomeCombo , String nomeForm , String valorSelecionado) throws Exception
+    {
+        HtmlComboBoxes hcb = new HtmlComboBoxes ();
+        return hcb.select ("cboComuna" , nomeForm , nomeCombo , "comuna_pk" ,
+                "nome" , "" , valorSelecionado);
+    }
+
+    /**
+     *
+     * @param nomeCombo nome da combobox no formulário
+     * @param nomeForm nome do formulário onde a combobox está inserida
      * @param nomeComboSeguinte nome da combobox seguinte que será afectada
      * @param valorSelecionado
      * @return

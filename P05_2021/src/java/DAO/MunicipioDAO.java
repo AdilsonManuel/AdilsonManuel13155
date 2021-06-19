@@ -184,7 +184,7 @@ public class MunicipioDAO
         //ex: nomeCombo+Text
         //ex: nomeCombo+Relac
         //ex: nomeCombo+Value
-        return hcb.selectDependente ("municipio" , nomeForm , nomeCombo ,
+        return hcb.selectDependente ("cboMunicipio" , nomeForm , nomeCombo ,
                 "comboProvincia" , nomeCombo , "municipio_pk" , "nome" ,
                 "provincia_fk" , "onChange=\"javascript: "
                 + "selectChange('" + nomeCombo + "', '" + ncs

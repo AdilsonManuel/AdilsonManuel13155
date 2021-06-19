@@ -6,6 +6,8 @@
 
 <jsp:useBean id="paisDAO" scope="page" class="DAO.PaisDAO"/>
 <jsp:useBean id="provinciaDAO" scope="page" class="DAO.ProvinciaDAO"/>
+<jsp:useBean id="municipioDAO" scope="page" class="DAO.MunicipioDAO"/>
+<jsp:useBean id="comunaDAO" scope="page" class="DAO.ComunaDAO"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Util.HtmlComboBoxes"%>
 <!DOCTYPE html>
@@ -22,8 +24,7 @@
 
         <link rel="stylesheet" href="css/bootstrap-5.0.0-dist/css/bootstrap.css">
         <script language="javascript" src="js/repopularCombo.js"></script>
-        <script language="javascript" src="js/direccionadorServlet.js"></script>
-        <script language="javascript" src="js/direccionadorServlet_1.js"></script>
+        <script language="javascript" src="js/funcaoAuxiliar.js"></script>
         <script type="text/javascript" >
             $(function () {
                 $('.datepicker').datepicker({
@@ -34,7 +35,7 @@
     </head>
 
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-collapse-sm navbar-dark bg-dark">
         <a href="#" class="navbar-brand">IMOB Sells</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
             <span class="navbar-toggler-icon"></span>
@@ -52,156 +53,166 @@
 
     </nav>
 
-    <form action="ClienteServlet" class="main-form needs-validation" id="clienteForm" name="clienteForm" method="POST">
+    <div class="container" style="margin-top: 10px">
         <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="txtPrimeiroNome">Primeiro nome</label>
-                    <input type="text" name="txtPrimeiroNome" id="txtPrimeiroNome" class="form-control">
-                    <small class="form-text text-muted">
-                        Digite o seu primeiro nome.
-                    </small>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="txtUltimoNome">Ultimo nome</label>
-                    <input type="text" name="txtUltimoNome" id="txtUltimoNome" class="form-control">
-                    <small class="form-text text-muted">
-                        Digite o seu último nome.
-                    </small>
-                </div>
+            <div class="col-md-12">
+                <form class="main-form needs-validation" id="clienteForm" name="clienteForm" method="POST">
+                    <fieldset>
+                        <legend class="legenda col-md-8">
+                        </legend>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="txtPrimeiroNome">Primeiro nome</label>
+                                    <input type="text" name="txtPrimeiroNome" id="txtPrimeiroNome" class="form-control">
+                                    <small class="form-text text-muted">
+                                        Digite o seu primeiro nome.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="txtUltimoNome">Ultimo nome</label>
+                                    <input type="text" name="txtUltimoNome" id="txtUltimoNome" class="form-control">
+                                    <small class="form-text text-muted">
+                                        Digite o seu último nome.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="nome">Nome completo</label>
+                                    <input type="text" name="txtnome" id="nome" class="form-control" required>
+                                    <div class="invalid-feedback"> Digite o seu nome completo.</div>
+
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="txtData_nascimento">Data de nascimento</label>
+                                    <input type="date" name="txtData_nascimento" id="txtData_nascimento" class="form-control datepicker" required>
+                                    <div class="invalid-feedback">Digite selecione uma data válida.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="txtSexo">Sexo</label>
+                                    <%= new HtmlComboBoxes ().select ("sexo" , "clienteForm" , "comboSexo" , "sexo_pk" , "nome" , "" , "")%>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="txtEstadoCivil">Estado civil</label>
+                                    <%= new HtmlComboBoxes ().select ("estado_civil" , "clienteForm" , "comboEstado_civil" , "estado_civil_pk" , "nome" , "" , "")%>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="txtOperadora">Operadora</label>
+                                <%= new HtmlComboBoxes ().select ("telefone" , "clienteForm" , "comboTelefone" , "telefone_pk" , "operadora" , "" , "")%>
+                            </div>
+
+                            <div class="col">
+                                <label for="txtNumero">Numero</label>
+                                <input type="tel" name="txtNumero" id="txtNumero" class="form-control" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="txtEmail">Email</label>
+                            <input type="email" name="txtEmail" id="txtEmail" class="form-control" required>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="legenda col-md-8"> Endereço</legend>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="pais">Pais</label>
+                                    <%= paisDAO.gerarComboPaisesComEvento ("cbPais" , "clienteForm" , "cboProvincia" , null)%>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="provincia">Provincia</label>
+                                    <%= provinciaDAO.gerarComboProvinciascomEvento("cboProvincia", "clienteForm" , "cboMunicipio" , null)%>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="municipio">Municipio</label>
+                                    <%= municipioDAO.gerarComboBoxComEvento ("cboMunicipio", "clienteForm" , "cbomunicipio" , null)%>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="comuna">Comuna</label>
+                                    <%= comunaDAO.gerarComboBox ("cboComuna", "clienteForm" , null)%>
+
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="legenda col-md-8">Dados da conta</legend>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="nome_usuario">Nome do usuário</label>
+                                    <input type="text" name="nome_usuario" id="nome_usuario" class="form-control" required>
+                                    <div class="invalid-feedback">Digite o nome do usuario.</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="senha_usuario">Senha do usuário</label>
+                                    <input type="password" name="senha_usuario" id="senha_usuario" class="form-control">
+                                    <div class="invalid-feedback">Digite a senha do usuario</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+
+                    <div class="row">
+                        <div class="col-md-8" >
+                            <input type="button" class="btn btn-success" name="guardar" value="cadastrar" onclick="ClienteServlet?operacao=Cadastrar&&redirecionar=homeRoot.jsp"/>
+                            <button type="reset" class="btn btn-primary-outline">
+                                Limpar
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-dark-green"
+                                onclick="location.href = 'homeRoot.jsp'"
+                                >
+                                Voltar
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="nome">Nome completo</label>
-                    <input type="text" name="nome" id="nome" class="form-control" required>
-                    <div class="invalid-feedback"> Digite o seu nome completo.</div>
-
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="form-group">
-                    <label for="txtData_nascimento">Data de nascimento</label>
-                    <input type="date" name="txtData_nascimento" id="txtData_nascimento" class="form-control datepicker" required>
-                    <div class="invalid-feedback">Digite selecione uma data válida.</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="nome_usuario">Nome do usuário</label>
-                    <input type="text" name="nome_usuario" id="nome_usuario" class="form-control" required>
-                    <div class="invalid-feedback">Digite o nome do usuario.</div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="senha_usuario">Senha do usuário</label>
-                    <input type="password" name="senha_usuario" id="senha_usuario" class="form-control">
-                    <div class="invalid-feedback">Digite a senha do usuario</div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="txtSexo">Sexo</label>
-                    <%= new HtmlComboBoxes ().select ("sexo" , "clienteForm" , "comboSexo" , "sexo_pk" , "nome" , "" , "")%>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="form-group">
-                    <label for="txtEstadoCivil">Estado civil</label>
-                    <%= new HtmlComboBoxes ().select ("estado_civil" , "clienteForm" , "comboEstado_civil" , "estado_civil_pk" , "nome" , "" , "")%>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <label for="txtOperadora">Operadora</label>
-                <%= new HtmlComboBoxes ().select ("telefone" , "clienteForm" , "comboTelefone" , "telefone_pk" , "operadora" , "" , "")%>
-            </div>
-
-            <div class="col">
-                <label for="txtNumero">Numero</label>
-                <input type="tel" name="txtNumero" id="txtNumero" class="form-control" required>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="txtEmail">Email</label>
-            <input type="email" name="txtEmail" id="txtEmail" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label for="pais">Pais</label>
-                    <%= paisDAO.gerarComboPaisesComEvento ("" , "clienteForm" , "comboProvincia" , null)%>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-8">
-                    <label for="provincia">Provincia</label>
-                    <%= new HtmlComboBoxes ().select ("provincia" , "clienteForm" , "comboProvincia" , "provincia_pk" , "nome" , "" , "")%>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-8">
-                    <label for="municipio">Municipio</label>
-                    <%= new HtmlComboBoxes ().select ("municipio" , "clienteForm" , "comboMunicipio" , "municipio_pk" , "nome" , "" , "")%>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label for="comuna">Comuna</label>
-                    <%= new HtmlComboBoxes ().select ("comuna" , "clienteForm" , "comboComuna" , "comuna_pk" , "nome" , "" , "")%>
-
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8" >
-                <input
-                    type="button"
-                    class="btn btn-success"
-                    name="gravar"
-                    id="gravar"
-                    value="GRAVAR"
-                    onclick="direccionar('clienteForm', 'ClienteServlet', 1, 0)"
-                    />
-                <button type="reset" class="btn btn-primary-outline">
-                    Limpar
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-dark-green"
-                    onclick="location.href = 'homeRoot.jsp'"
-                    >
-                    Voltar
-                </button>
-            </div>
-        </div>
-    </form>
+    </div>
 
 </html>

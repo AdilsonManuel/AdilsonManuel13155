@@ -65,8 +65,8 @@ public class ClienteServlet extends HttpServlet
         try (PrintWriter out = response.getWriter ())
         {
             String operacao = request.getParameter ("operacao");
-
-            if (operacao == ConstantesProjecto.CADASTRAR_CLIENTE)
+            
+            if (operacao == ConstantesProjecto.CADASTRAR)
             {
 
                 /*DAO*/
@@ -95,7 +95,6 @@ public class ClienteServlet extends HttpServlet
                 PaisModelo paisModelo = new PaisModelo ();
                 ProvinciaModelo provinciaModelo = new ProvinciaModelo ();
                 MunicipioModelo municipioModelo = new MunicipioModelo ();
-                
 
                 String nome_usuario = request.getParameter ("nome_usuario");
                 String senha_usuario = request.getParameter ("senha_usuario");
@@ -159,15 +158,16 @@ public class ClienteServlet extends HttpServlet
                 pessoaModelo.setSexo_fk (sexo_fk);
                 pessoaModelo.setTelefone_fk (telefone_fk);
 
-                JOptionPane.showMessageDialog (null, pessoaModelo.toString ());
+                JOptionPane.showMessageDialog (null , pessoaModelo.toString ());
                 pessoaDAO.inserirPessoa (pessoaModelo);
 
                 int pessoa_fk = pessoaDAO.getUltimaPessoa ();
- 
+
                 clienteModelo.setPessoa_fk (pessoa_fk);
                 clienteDAO.inserirCliente (clienteModelo);
-                
-               
+
+                response.sendRedirect ("homeRoot.jsp");
+
             }
         }
     }
