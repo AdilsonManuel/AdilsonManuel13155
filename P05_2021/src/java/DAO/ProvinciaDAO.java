@@ -160,20 +160,40 @@ public class ProvinciaDAO
 
     }
 
-    public String gerarComboProvincias (String form , String codigo , String valorSeleccionado) throws Exception
+    /**
+     *
+     * @param nomeCombo nome da combobox no formulário
+     * @param nomeForm nome do formulário onde a combobox está inserida
+     * @param valorSelecionado
+     * @return
+     * @throws Exception
+     */
+    public String gerarComboProvincias (String nomeCombo , String nomeForm , String valorSelecionado) throws Exception
     {
-
-        return new HtmlComboBoxes ().selectDependente ("Provincia" , form , "cboprovincia" + codigo , "cboPais" + codigo ,
-                "cboprovincia" + codigo , "provincia_pk" , "nome" , "pais_fk" , "" , valorSeleccionado);
+        HtmlComboBoxes hcb = new HtmlComboBoxes ();
+        //nome do arrayJavascript
+        //ex: nomeCombo+Text
+        //ex: nomeCombo+Relac
+        //ex: nomeCombo+Value
+        return hcb.selectDependente ("provincia" , nomeForm , nomeCombo ,
+                "cboPais" , nomeCombo , "provincia_pk" , "nome" ,
+                "pais_fk" , "" , valorSelecionado);
     }
 
-    public String gerarComboProvinciascomEvento (String form , String codigo , String valorSeleccionado , String nomeComboSeguinte) throws Exception
+    public String gerarComboProvinciascomEvento (String nomeCombo , String nomeForm , String nomeComboSeguinte , String valorSelecionado) throws Exception
     {
+        HtmlComboBoxes hcb = new HtmlComboBoxes ();
+        String ncs = nomeComboSeguinte;
+        //nome do arrayJavascript
+        //ex: nomeCombo+Text
+        //ex: nomeCombo+Relac
+        //ex: nomeCombo+Value
+        return hcb.selectDependente ("provincia" , nomeForm , nomeCombo ,
+                "comboPais" , nomeCombo , "provincia_pk" , "nome" ,
+                "pais_fk" , "onChange=\"javascript: "
+                + "selectChange('" + nomeCombo + "', '" + ncs
+                + "', " + ncs + "Text, " + ncs
+                + "Relac, " + ncs + "Value);\"" , valorSelecionado);
 
-        return new HtmlComboBoxes ().selectDependente ("Provincia" , form , "cboprovincia" + codigo , "cboPais" + codigo ,
-                "cboprovincia" + codigo , "provincia_pk" , "nome" , "pais_fk" , "onChange=\"javascript: "
-                + "selectChange('cboprovincia" + codigo + "', '" + nomeComboSeguinte
-                + "', " + nomeComboSeguinte + "Text, " + nomeComboSeguinte
-                + "Relac, " + nomeComboSeguinte + "Value);\"" , valorSeleccionado);
     }
 }

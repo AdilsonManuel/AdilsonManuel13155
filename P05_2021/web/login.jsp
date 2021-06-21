@@ -27,7 +27,7 @@
             <input type="password" name="senha_usuario" placeholder="Password">
             <input type="submit" name="" value="Login">
             <p class="para-2">
-                Not have an account? <a href="signup.html">Sign Up Here</a>
+                Não tem conta? <a href="signup.html">Increva - se no site</a>
             </p>
         </form>
 

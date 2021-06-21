@@ -61,13 +61,21 @@
                         <li>
                             <a class="nav-link scrollto" href="#hero">Pagina Inicial</a>
                         </li>
-                        <li><a class="nav-link scrollto" href="#about">Sobre</a></li>
-                        <li><a class="nav-link scrollto" href="cliente.jsp">Clientes</a></li>
-                        <li><a class="nav-link scrollto" href="correctores.jsp">Corrector</a></li>
-                        <li><a class="nav-link scrollto" href="proprietarios.jsp">Proprietarios</a></li>
-                        <li><a class="nav-link scrollto" href="fiadores.jsp">Fiadores</a></li>
-                        <li><a class="nav-link scrollto" href="imoveis.jsp">Imoveis</a></li>
-                        <li><a class="nav-link scrollto" href="vendas.jsp">Vendas</a></li>
+                        <li class="dropdown">
+                            <a href="#"><span>Clientes</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="cliente.jsp">Cadastrar</a></li>
+                                <li><a href="#">Visualizar</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span>Funcionário</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="#">Cadastrar</a></li>
+                                <li><a href="#">Visualizar</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="nav-link scrollto" href="#">Serviços</a></li>
                         <li class="dropdown">
                             <a href="#"><span>Tabelas</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
@@ -81,6 +89,13 @@
                                         <li><a href="#">Por nome</a></li>
                                     </ul>
                                 </li>
+                                <li class="dropdown">
+                                    <a href="#"><span>Portofolios</span> <i class="bi bi-chevron-right"></i></a>
+                                    <ul>
+                                        <li><a href="#">Carregar Localização</a></li>
+                                        <li><a href="#">Carregar Portofólio</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="#">Telefone</a></li>
                                 <li><a href="#">Estado Civil</a></li>
                                 <li><a href="pais.jsp">Pais</a></li>
@@ -90,6 +105,7 @@
                             </ul>
                         </li>
                         <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
+                        <li><a class="nav-link scrollto" href="#about">Sobre</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>

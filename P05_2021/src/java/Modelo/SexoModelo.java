@@ -20,6 +20,11 @@ public class SexoModelo
     public SexoModelo ()
     {
     }
-    
+
+    public SexoModelo (int sexo_pk)
+    {
+        this.sexo_pk = sexo_pk;
+    }
+ 
     
 }

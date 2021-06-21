@@ -163,7 +163,7 @@ public class MunicipioDAO
         //ex: nomeCombo+Relac
         //ex: nomeCombo+Value
         return hcb.selectDependente ("municipio" , nomeForm , nomeCombo ,
-                "comboProvincia" , nomeCombo , "municipio_pk" , "nome" ,
+                "cboprovincia" , nomeCombo , "municipio_pk" , "nome" ,
                 "provincia_fk" , "" , valorSelecionado);
     }
 
@@ -185,7 +185,7 @@ public class MunicipioDAO
         //ex: nomeCombo+Relac
         //ex: nomeCombo+Value
         return hcb.selectDependente ("cboMunicipio" , nomeForm , nomeCombo ,
-                "comboProvincia" , nomeCombo , "municipio_pk" , "nome" ,
+                "cboProvincia" , nomeCombo , "municipio_pk" , "nome" ,
                 "provincia_fk" , "onChange=\"javascript: "
                 + "selectChange('" + nomeCombo + "', '" + ncs
                 + "', " + ncs + "Text, " + ncs

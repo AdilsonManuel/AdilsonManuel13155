@@ -25,13 +25,7 @@
         <link rel="stylesheet" href="css/bootstrap-5.0.0-dist/css/bootstrap.css">
         <script language="javascript" src="js/repopularCombo.js"></script>
         <script language="javascript" src="js/funcaoAuxiliar.js"></script>
-        <script type="text/javascript" >
-            $(function () {
-                $('.datepicker').datepicker({
-                    format: 'yyyy-mm-dd'
-                });
-            });
-        </script>
+
     </head>
 
 
@@ -53,7 +47,7 @@
 
     </nav>
 
-    <div class="container" style="margin-top: 10px">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <form class="main-form needs-validation" id="clienteForm" name="clienteForm" method="POST">
@@ -149,7 +143,9 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label for="provincia">Provincia</label>
-                                    <%= provinciaDAO.gerarComboProvinciascomEvento("cboProvincia", "clienteForm" , "cboMunicipio" , null)%>
+                                    <%= new HtmlComboBoxes ().select ("provincia" , "clienteForm" ,
+                                            "cboprovincia" , "provincia_pk" , "nome" , "" ,
+                                            "")%>
                                 </div>
                             </div>
 
@@ -157,7 +153,9 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label for="municipio">Municipio</label>
-                                    <%= municipioDAO.gerarComboBoxComEvento ("cboMunicipio", "clienteForm" , "cbomunicipio" , null)%>
+                                    <%= new HtmlComboBoxes ().select ("municipio" , "clienteForm" ,
+                                            "cboMunicipio" , "municipio_pk" , "nome" , "" ,
+                                            "")%>
                                 </div>
                             </div>
 
@@ -167,7 +165,8 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label for="comuna">Comuna</label>
-                                    <%= comunaDAO.gerarComboBox ("cboComuna", "clienteForm" , null)%>
+                                    <%= new HtmlComboBoxes ().select ("comuna" , "clienteForm" ,
+                                            "cboComuna" , "comuna_pk" , "nome" , "" , "")%>
 
                                 </div>
                             </div>
@@ -197,15 +196,16 @@
 
                     <div class="row">
                         <div class="col-md-8" >
-                            <input type="button" class="btn btn-success" name="guardar" value="cadastrar" onclick="ClienteServlet?operacao=Cadastrar&&redirecionar=homeRoot.jsp"/>
+                            <input 
+                                type="button"
+                                class="btn btn-success"
+                                value="Cadastrar"
+                                onclick="guardarFormCliente('ClienteServlet?operacao=Cadastrar&&redirecionar=homeRoot.jsp')"
+                             />
                             <button type="reset" class="btn btn-primary-outline">
                                 Limpar
                             </button>
-                            <button
-                                type="button"
-                                class="btn btn-dark-green"
-                                onclick="location.href = 'homeRoot.jsp'"
-                                >
+                            <button type="button" class="btn btn-dark-green"onclick="location.href = 'homeRoot.jsp'">
                                 Voltar
                             </button>
                         </div>

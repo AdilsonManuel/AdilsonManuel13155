@@ -45,7 +45,7 @@ import javax.swing.JOptionPane;
  *
  * @author azm
  */
-@WebServlet(name = "ClienteServlet" , urlPatterns = "/ServLet/ClienteServlet")
+@WebServlet("/ClienteServlet")
 public class ClienteServlet extends HttpServlet
 {
 
@@ -61,115 +61,7 @@ public class ClienteServlet extends HttpServlet
     protected void processRequest (HttpServletRequest request , HttpServletResponse response)
             throws ServletException , IOException , SQLException , ClassNotFoundException
     {
-        response.setContentType ("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter ())
-        {
-            String operacao = request.getParameter ("operacao");
-            
-            if (operacao == ConstantesProjecto.CADASTRAR)
-            {
 
-                /*DAO*/
-                ClienteDAO clienteDAO = new ClienteDAO ();
-                ContaDAO contaDAO = new ContaDAO ();
-                EnderecoDAO enderecoDAO = new EnderecoDAO ();
-                ComunaDAO comunaDAO = new ComunaDAO ();
-                SexoDAO sexoDAO = new SexoDAO ();
-                EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO ();
-                TelefoneDAO telefoneDAO = new TelefoneDAO ();
-                EmailDAO emailDAO = new EmailDAO ();
-                PessoaDAO pessoaDAO = new PessoaDAO ();
-                MunicipioDAO municipioDAO = new MunicipioDAO ();
-                ProvinciaDAO provinciaDAO = new ProvinciaDAO ();
-                PaisDAO paisDAO = new PaisDAO ();
-
-                /*Modelo*/
-                ContaModelo contaModelo = new ContaModelo ();
-                EnderecoModelo enderecoModelo = new EnderecoModelo ();
-                SexoModelo sexoModelo = new SexoModelo ();
-                EstadoCivilModelo estadoCivilModelo = new EstadoCivilModelo ();
-                TelefoneModelo telefoneModelo = new TelefoneModelo ();
-                EmailModelo emailModelo = new EmailModelo ();
-                PessoaModelo pessoaModelo = new PessoaModelo ();
-                ClienteModelo clienteModelo = new ClienteModelo ();
-                PaisModelo paisModelo = new PaisModelo ();
-                ProvinciaModelo provinciaModelo = new ProvinciaModelo ();
-                MunicipioModelo municipioModelo = new MunicipioModelo ();
-
-                String nome_usuario = request.getParameter ("nome_usuario");
-                String senha_usuario = request.getParameter ("senha_usuario");
-                int tipo_conta = ConstantesProjecto.CLIENTE_CADASTRADO;
-
-                contaModelo.setNomeUsuario (nome_usuario);
-                contaModelo.setSenha_usuario (senha_usuario);
-                contaModelo.setTipo_conta_fk (tipo_conta);
-                contaDAO.inserirConta (contaModelo);
-
-                int conta_fk = contaDAO.getIDconta (nome_usuario , senha_usuario);
-
-                int comuna_fk = Integer.parseInt (request.getParameter ("txtComuna"));
-                String bairro = request.getParameter ("txtBairro");
-                String rua = request.getParameter ("txtRua");
-                String numeroCasa = request.getParameter ("txtNumeroCasa");
-
-                enderecoModelo.setBairro (bairro);
-                enderecoModelo.setRua (rua);
-                enderecoModelo.setNumero_casa (numeroCasa);
-                enderecoModelo.setComunaModelo (comunaDAO.getDadosComuna (comuna_fk));
-
-                enderecoDAO.inserirEndereco (enderecoModelo);
-
-                int endereco_fk = enderecoDAO.getEndereco_pk (numeroCasa);
-
-                String sexo = request.getParameter ("txtSexo");
-                sexoModelo.setNome (sexo);
-                sexoDAO.inserirSexo (sexoModelo);
-
-                int sexo_fk = sexoDAO.getSexo_pk (sexo);
-
-                String estado_civil = request.getParameter ("txtEstadoCivil");
-                estadoCivilModelo.setNome (estado_civil);
-                estadoCivilDAO.inserirEstadoCivil (estadoCivilModelo);
-
-                int estado_civil_fk = estadoCivilDAO.getEstadoCivil_pk (estado_civil);
-
-                String numero = request.getParameter ("txtNumero");
-                String operadora = request.getParameter ("txtOperadora");
-                telefoneModelo.setOperadora (operadora);
-                telefoneModelo.setNumero (numero);
-                telefoneDAO.inserirTelefone (telefoneModelo);
-
-                int telefone_fk = telefoneDAO.getTelefone_pk (numero);
-
-                String email = request.getParameter ("txtEmail");
-                emailModelo.setDominio (email);
-                emailDAO.inserirEmail (emailModelo);
-
-                int email_fk = emailDAO.getEmail_pk (email);
-
-                String nome = request.getParameter ("nome");
-                String[] data = request.getParameter ("txtData_nascimento").split ("/");
-                String data_nascimento = data[2] + data[1] + data[0];
-                pessoaModelo.setData_nascimento (data_nascimento);
-                pessoaModelo.setEmail_fk (email_fk);
-                pessoaModelo.setEndereco_fk (endereco_fk);
-                pessoaModelo.setEstado_civil_fk (estado_civil_fk);
-                pessoaModelo.setNome (nome);
-                pessoaModelo.setSexo_fk (sexo_fk);
-                pessoaModelo.setTelefone_fk (telefone_fk);
-
-                JOptionPane.showMessageDialog (null , pessoaModelo.toString ());
-                pessoaDAO.inserirPessoa (pessoaModelo);
-
-                int pessoa_fk = pessoaDAO.getUltimaPessoa ();
-
-                clienteModelo.setPessoa_fk (pessoa_fk);
-                clienteDAO.inserirCliente (clienteModelo);
-
-                response.sendRedirect ("homeRoot.jsp");
-
-            }
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -235,5 +127,114 @@ public class ClienteServlet extends HttpServlet
     {
         return "Short description";
     }// </editor-fold>
+
+    @Override
+    protected void service (HttpServletRequest request , HttpServletResponse response) throws ServletException , IOException
+    {
+        response.setContentType ("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter ())
+        {
+            String operacao = request.getParameter ("operacao");
+            String redirecionar = request.getParameter ("redirecionar");
+
+            if (operacao.equals ("Cadastrar"))
+            {
+
+                /*DAO*/
+                ClienteDAO clienteDAO = new ClienteDAO ();
+                ContaDAO contaDAO = new ContaDAO ();
+                EnderecoDAO enderecoDAO = new EnderecoDAO ();
+                ComunaDAO comunaDAO = new ComunaDAO ();
+                SexoDAO sexoDAO = new SexoDAO ();
+                EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO ();
+                TelefoneDAO telefoneDAO = new TelefoneDAO ();
+                EmailDAO emailDAO = new EmailDAO ();
+                PessoaDAO pessoaDAO = new PessoaDAO ();
+                MunicipioDAO municipioDAO = new MunicipioDAO ();
+                ProvinciaDAO provinciaDAO = new ProvinciaDAO ();
+                PaisDAO paisDAO = new PaisDAO ();
+
+                /*Modelo*/
+                ContaModelo contaModelo = new ContaModelo ();
+                EnderecoModelo enderecoModelo = new EnderecoModelo ();
+                SexoModelo sexoModelo = new SexoModelo ();
+                EstadoCivilModelo estadoCivilModelo = new EstadoCivilModelo ();
+                TelefoneModelo telefoneModelo = new TelefoneModelo ();
+                EmailModelo emailModelo = new EmailModelo ();
+                PessoaModelo pessoaModelo = new PessoaModelo ();
+                ClienteModelo clienteModelo = new ClienteModelo ();
+                PaisModelo paisModelo = new PaisModelo ();
+                ProvinciaModelo provinciaModelo = new ProvinciaModelo ();
+                MunicipioModelo municipioModelo = new MunicipioModelo ();
+
+                String nome_usuario = request.getParameter ("nome_usuario");
+                String senha_usuario = request.getParameter ("senha_usuario");
+                int tipo_conta = ConstantesProjecto.CLIENTE_CADASTRADO;
+
+                contaModelo.setNomeUsuario (nome_usuario);
+                contaModelo.setSenha_usuario (senha_usuario);
+                contaModelo.setTipo_conta_fk (tipo_conta);
+                contaDAO.inserirConta (contaModelo);
+
+                int conta_fk = contaDAO.getIDconta (nome_usuario , senha_usuario);
+
+//                int comuna_fk = Integer.parseInt (request.getParameter ("txtComuna"));
+//                String bairro = request.getParameter ("txtBairro");
+//                String rua = request.getParameter ("txtRua");
+//                String numeroCasa = request.getParameter ("txtNumeroCasa");
+//
+//                enderecoModelo.setBairro (bairro);
+//                enderecoModelo.setRua (rua);
+//                enderecoModelo.setNumero_casa (numeroCasa);
+//                enderecoModelo.setComunaModelo (comunaDAO.getDadosComuna (comuna_fk));
+//
+//                enderecoDAO.inserirEndereco (enderecoModelo);
+//
+//                int endereco_fk = enderecoDAO.getEndereco_pk (numeroCasa);
+                int sexo = Integer.parseInt (request.getParameter ("txtSexo"));
+                int estado_civil = Integer.parseInt (request.getParameter ("txtEstadoCivil"));
+                int email = Integer.parseInt (request.getParameter ("txtEmail"));
+                int operadora = Integer.parseInt (request.getParameter ("txtOperadora"));
+                
+                String numero = request.getParameter ("txtNumero");
+
+                String nome = request.getParameter ("txtnome");
+                String[] data = request.getParameter ("txtData_nascimento").split ("/");
+                String data_nascimento = data[0] + data[1] + data[2];
+                pessoaModelo.setData_nascimento (data_nascimento);
+                pessoaModelo.setEmail_fk (email);
+//                pessoaModelo.setEndereco_fk (endereco_fk);
+                pessoaModelo.setEstado_civil_fk (estado_civil);
+                pessoaModelo.setNome (nome);
+                pessoaModelo.setSexo_fk (sexo);
+                pessoaModelo.setTelefone_fk (operadora);
+
+                int pessoa_fk = pessoaDAO.getUltimaPessoa ();
+
+                clienteModelo.setPessoa_fk (pessoa_fk);
+                clienteDAO.inserirCliente (clienteModelo);
+
+                response.sendRedirect (redirecionar);
+
+                // imprime o nome do contato que foi adicionado
+                out.println ("<html>");
+                out.println ("<body>");
+                out.println ("Cliente " + pessoaModelo.getNome ()
+                        + " adicionado com sucesso");
+                out.println ("</body>");
+                out.println ("</html>");
+
+            }
+
+        }
+        catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger (ClienteServlet.class.getName ()).log (Level.SEVERE , null , ex);
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger (ClienteServlet.class.getName ()).log (Level.SEVERE , null , ex);
+        }
+    }
 
 }

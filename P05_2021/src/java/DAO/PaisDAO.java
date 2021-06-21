@@ -113,7 +113,7 @@ public class PaisDAO
         }
         return null;
     }
-    
+
     public boolean alterarPais (PaisModelo paisModelo) throws SQLException
     {
         if (paisModelo != null)
@@ -156,14 +156,16 @@ public class PaisDAO
                 "nome" , "" , valorSeleccionado);
     }
 
-    public String gerarComboPaisesComEvento (String id , String form , String valorSeleccionado , String nomeComboSeguinte) throws Exception
+    public String gerarComboPaisesComEvento (String nomeCombo , String nomeForm , String nomeComboSeguinte , String valorSelecionado) throws Exception
     {
 
-        return new HtmlComboBoxes ().select ("Pais" , form , "cboPais" + id , "pais_pk" ,
-                "nome" , "onChange=\"javascript: "
-                + "selectChange('cboPais" + id + "', '" + nomeComboSeguinte
-                + "', " + nomeComboSeguinte + "Text, " + nomeComboSeguinte
-                + "Relac, " + nomeComboSeguinte + "Value);\"" , valorSeleccionado);
+        HtmlComboBoxes hcb = new HtmlComboBoxes ();
+        String ncs = nomeComboSeguinte;
+        return hcb.select ("pais" , nomeForm , nomeCombo , "pais_pk" , "nome" ,
+                "onChange=\"javascript: "
+                + "selectChange('" + nomeCombo + "', '" + ncs
+                + "', " + ncs + "Text, " + ncs
+                + "Relac, " + ncs + "Value);\"" , valorSelecionado);
     }
 
     /**
@@ -242,7 +244,7 @@ public class PaisDAO
             tabela += "<tbody>"
                     + "<tr>"
                     + "<td>" + (i + 1) + "</td>"
-                    + "<td>" + inserirObjectoHTML ("text" , "txtPais" + pais.getPaisPK (), "txtPais" + pais.getPaisPK (), pais.getNome (), "") + "</td>"
+                    + "<td>" + inserirObjectoHTML ("text" , "txtPais" + pais.getPaisPK () , "txtPais" + pais.getPaisPK () , pais.getNome () , "") + "</td>"
                     + "<td>" + inserirObjectoHTML ("button" , "btnEditar" + pais.getPaisPK () , "btnEditar" + pais.getPaisPK () , "editar" , "editar(txtPais" + pais.getPaisPK () + "," + pais.getPaisPK () + "," + ConstantesProjecto.EDITAR + ")") + "</td>"
                     + "<td>" + inserirObjectoHTML ("button" , "btnEliminar" + pais.getPaisPK () , "btnEliminar" + pais.getPaisPK () , "eliminar" , "eliminar(" + pais.getPaisPK () + "," + ConstantesProjecto.ELIMINAR + ")") + "</td>"
                     + "</tr>";

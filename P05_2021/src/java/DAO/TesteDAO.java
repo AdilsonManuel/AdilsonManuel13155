@@ -9,6 +9,7 @@ import Modelo.ClienteModelo;
 import Modelo.PessoaModelo;
 import Modelo.ContaModelo;
 import Modelo.PessoaModelo;
+import Modelo.SexoModelo;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,6 +22,13 @@ public class TesteDAO
 
     public static void main (String[] args) throws SQLException , ClassNotFoundException
     {
+        
+        SexoDAO sexoDAO = new SexoDAO ();
+        SexoModelo sexoModelo = new SexoModelo ();
+        
+        sexoModelo.setNome ("Masculino");
+        System.out.println ("Genero -> "  + sexoDAO.getSexo_pk (sexoModelo.getNome ()));
+        
         PessoaModelo PessoaModelo = new PessoaModelo ();
         PessoaDAO pessoaDAO = new PessoaDAO ();
 //        System.out.println ("DAO.TesteDAO.main()"+pessoaDAO.getUltimaPessoa ());
