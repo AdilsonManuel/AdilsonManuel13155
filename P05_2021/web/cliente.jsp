@@ -95,7 +95,7 @@
                                 <div class="form-group">
                                     <label for="txtData_nascimento">Data de nascimento</label>
                                     <input name="txtData_nascimento" id="txtData_nascimento" class="form-control datepicker" required>
-                                    <input type="button" value="data" id="btn_txtData_nascimento"/>
+                                    <input type="button" value="Selecione uma data" id="btn_txtData_nascimento"/>
                                     <script type="text/javascript">//<![CDATA[
                                         var cal = Calendar.setup({
                                             onSelect: function (cal) {
