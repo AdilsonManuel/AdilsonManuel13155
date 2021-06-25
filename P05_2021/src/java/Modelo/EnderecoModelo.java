@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.io.Serializable;
 import lombok.Data;
 
 /**
@@ -12,11 +13,12 @@ import lombok.Data;
  * @author pc-accer
  */
 @Data
-public class EnderecoModelo
+public class EnderecoModelo implements Serializable
 {
-
+    
     private int endereco_pk;
-    private String bairro, rua,numero_casa;
+    private String bairro;
+    private int rua,numero_casa;
     private ComunaModelo comunaModelo;
     
     public EnderecoModelo ()

@@ -29,7 +29,7 @@ public class EnderecoDAO
         this.conexaoBD = new ConexaoBD ().getConnection ();
     }
 
-    public boolean inserirEndereco (EnderecoModelo enderecoModelo) throws SQLException
+    public void inserirEndereco (EnderecoModelo enderecoModelo) throws SQLException
     {
         if (enderecoModelo != null)
         {
@@ -38,17 +38,15 @@ public class EnderecoDAO
                     + " VALUES ( ?, ?, ?, ?)"))
             {
                 pst.setString (1 , enderecoModelo.getBairro ());
-                pst.setString (2 , enderecoModelo.getRua ());
-                pst.setString (3 , enderecoModelo.getNumero_casa ());
+                pst.setInt (2 , enderecoModelo.getRua ());
+                pst.setInt (3 , enderecoModelo.getNumero_casa ());
                 pst.setInt (4 , enderecoModelo.getComunaModelo ().getComuna_pk ());
-
+                System.out.println ("DAO.EnderecoDAO.inserirEndereco()" + enderecoModelo.toString ());
                 pst.execute ();
-                Mensagens.sucessoGuardar (enderecoModelo.getBairro ());
                 pst.close ();
-                return true;
+                
             }
         }
-        return false;
     }
 
     public List<EnderecoModelo> getListaEndereco () throws SQLException , ClassNotFoundException
@@ -63,8 +61,8 @@ public class EnderecoDAO
                 {
                     EnderecoModelo enderecoModelo = new EnderecoModelo ();
                     enderecoModelo.setBairro (rs.getString ("bairro"));
-                    enderecoModelo.setRua (rs.getString ("rua"));
-                    enderecoModelo.setNumero_casa (rs.getString ("numero_casa"));
+                    enderecoModelo.setRua (rs.getInt ("rua"));
+                    enderecoModelo.setNumero_casa (rs.getInt ("numero_casa"));
                     enderecoModelo.setComunaModelo (new ComunaDAO ().getDadosComuna (rs.getInt ("comuna_fk")));
 
                     listaEnderecoModelos.add (enderecoModelo);
@@ -88,8 +86,8 @@ public class EnderecoDAO
                 {
                     EnderecoModelo enderecoModelo = new EnderecoModelo ();
                     enderecoModelo.setBairro (rs.getString ("bairro"));
-                    enderecoModelo.setRua (rs.getString ("rua"));
-                    enderecoModelo.setNumero_casa (rs.getString ("numero_casa"));
+                    enderecoModelo.setRua (rs.getInt ("rua"));
+                    enderecoModelo.setNumero_casa (rs.getInt ("numero_casa"));
                     enderecoModelo.setComunaModelo (new ComunaDAO ().getDadosComuna (rs.getInt ("comuna_fk")));
 
                     listaEnderecoModelos.add (enderecoModelo);
@@ -113,8 +111,8 @@ public class EnderecoDAO
             {
                 enderecoModelo.setEndereco_pk (rs.getInt ("municipio_pk"));
                 enderecoModelo.setBairro (rs.getString ("bairro"));
-                enderecoModelo.setNumero_casa (rs.getString ("numero_casa"));
-                enderecoModelo.setRua (rs.getString ("rua"));
+                enderecoModelo.setNumero_casa (rs.getInt ("numero_casa"));
+                enderecoModelo.setRua (rs.getInt ("rua"));
                 enderecoModelo.setComunaModelo (new ComunaDAO ().getDadosComuna (rs.getInt ("comuna_fk")));
 
                 return enderecoModelo;
@@ -130,8 +128,8 @@ public class EnderecoDAO
                 + " numero_casa=?, comuna_fk=? WHERE endereco_pk=?"))
         {
             pst.setString (1 , enderecoModelo.getBairro ());
-            pst.setString (2 , enderecoModelo.getRua ());
-            pst.setString (3 , enderecoModelo.getNumero_casa ());
+            pst.setInt (2 , enderecoModelo.getRua ());
+            pst.setInt (3 , enderecoModelo.getNumero_casa ());
             pst.setInt (4 , enderecoModelo.getComunaModelo ().getComuna_pk ());
 
             pst.execute ();
@@ -155,11 +153,12 @@ public class EnderecoDAO
         }
     }
 
-    public int getEndereco_pk (String numero_casa) throws SQLException
+    public int getEndereco_pk (int numero_casa) throws SQLException
     {
-        try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT endereco_pk FROM public.endereco WHERE = " + numero_casa))
+        try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT endereco_pk FROM public.endereco WHERE numero_casa=" + numero_casa))
         {
             ResultSet rs = pst.executeQuery ();
+            rs.next ();
 
             if (rs.getInt (1) != 0)
             {

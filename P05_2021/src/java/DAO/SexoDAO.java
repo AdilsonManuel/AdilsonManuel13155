@@ -40,13 +40,14 @@ public class SexoDAO
         return false;
     }
 
-    public int getSexo_pk (String sexo) throws SQLException
+    public int getSexo_pk (int sexo) throws SQLException
     {
-        try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT sexo_pk FROM public.sexo WHERE = " + sexo))
+        try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT sexo_pk FROM public.sexo WHERE sexo_pk=" + sexo))
         {
             ResultSet rs = pst.executeQuery ();
+            rs.next ();
 
-            if (rs.getInt (1) != 0)
+            if (rs.getInt (1) > 0)
             {
                 return rs.getInt ("sexo_pk");
             }

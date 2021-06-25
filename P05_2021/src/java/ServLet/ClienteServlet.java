@@ -39,7 +39,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -178,51 +177,52 @@ public class ClienteServlet extends HttpServlet
 
                 int conta_fk = contaDAO.getIDconta (nome_usuario , senha_usuario);
 
-//                int comuna_fk = Integer.parseInt (request.getParameter ("txtComuna"));
-//                String bairro = request.getParameter ("txtBairro");
-//                String rua = request.getParameter ("txtRua");
-//                String numeroCasa = request.getParameter ("txtNumeroCasa");
-//
-//                enderecoModelo.setBairro (bairro);
-//                enderecoModelo.setRua (rua);
-//                enderecoModelo.setNumero_casa (numeroCasa);
-//                enderecoModelo.setComunaModelo (comunaDAO.getDadosComuna (comuna_fk));
-//
-//                enderecoDAO.inserirEndereco (enderecoModelo);
-//
-//                int endereco_fk = enderecoDAO.getEndereco_pk (numeroCasa);
-                int sexo = Integer.parseInt (request.getParameter ("txtSexo"));
-                int estado_civil = Integer.parseInt (request.getParameter ("txtEstadoCivil"));
-                int email = Integer.parseInt (request.getParameter ("txtEmail"));
-                int operadora = Integer.parseInt (request.getParameter ("txtOperadora"));
-                
-                String numero = request.getParameter ("txtNumero");
+                int comuna_fk = Integer.parseInt (request.getParameter ("cboComuna").trim ());
+                String bairro = request.getParameter ("Projecto Nando");
+//                int rua = Integer.parseInt ( request.getParameter ("1"));
+//                int numeroCasa = Integer.parseInt (request.getParameter ("246"));
 
+                enderecoModelo.setBairro ("Projecto Nando");
+                enderecoModelo.setRua (1);
+                enderecoModelo.setNumero_casa (246);
+                enderecoModelo.setComunaModelo (comunaDAO.getDadosComuna (comuna_fk));
+
+                enderecoDAO.inserirEndereco (enderecoModelo);
+                int endereco_fk = enderecoDAO.getEndereco_pk (246);
+                int sexo = Integer.parseInt (request.getParameter ("comboSexo").trim ());
+                int sexo_fk = sexoDAO.getSexo_pk (sexo);
+                int estado_civil = Integer.parseInt (request.getParameter ("comboEstado_civil").trim ());
+                int estado_civil_pk = estadoCivilDAO.getEstadoCivil_pk (estado_civil);
+                int email = Integer.parseInt (request.getParameter ("comboEmail"));
+                int operadora = Integer.parseInt (request.getParameter ("comboTelefone"));
+
+                String numero = request.getParameter ("txtNumero");
                 String nome = request.getParameter ("txtnome");
-                String[] data = request.getParameter ("txtData_nascimento").split ("/");
-                String data_nascimento = data[0] + data[1] + data[2];
+                String data_nascimento = request.getParameter ("txtData_nascimento");
+
                 pessoaModelo.setData_nascimento (data_nascimento);
                 pessoaModelo.setEmail_fk (email);
-//                pessoaModelo.setEndereco_fk (endereco_fk);
-                pessoaModelo.setEstado_civil_fk (estado_civil);
+                pessoaModelo.setEndereco_fk (endereco_fk);
+                pessoaModelo.setEstado_civil_fk (estado_civil_pk);
                 pessoaModelo.setNome (nome);
-                pessoaModelo.setSexo_fk (sexo);
+                pessoaModelo.setSexo_fk (sexo_fk);
                 pessoaModelo.setTelefone_fk (operadora);
 
+                pessoaDAO.inserirPessoa (pessoaModelo);
                 int pessoa_fk = pessoaDAO.getUltimaPessoa ();
 
                 clienteModelo.setPessoa_fk (pessoa_fk);
                 clienteDAO.inserirCliente (clienteModelo);
 
-                response.sendRedirect (redirecionar);
-
-                // imprime o nome do contato que foi adicionado
+                // imprime o nome do cliente que foi adicionado
                 out.println ("<html>");
                 out.println ("<body>");
                 out.println ("Cliente " + pessoaModelo.getNome ()
                         + " adicionado com sucesso");
                 out.println ("</body>");
                 out.println ("</html>");
+
+                response.sendRedirect (redirecionar);
 
             }
 

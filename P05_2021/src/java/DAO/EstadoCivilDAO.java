@@ -39,11 +39,12 @@ public class EstadoCivilDAO
         return false;
     }
 
-    public int getEstadoCivil_pk (String estado_civil_pk) throws SQLException
+    public int getEstadoCivil_pk (int estado_civil_pk) throws SQLException
     {
-        try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT estado_civil_pk FROM public.estado_civil WHERE = " + estado_civil_pk))
+        try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT estado_civil_pk FROM public.estado_civil WHERE estado_civil_pk= " + estado_civil_pk))
         {
             ResultSet rs = pst.executeQuery ();
+            rs.next ();
 
             if (rs.getInt (1) != 0)
             {

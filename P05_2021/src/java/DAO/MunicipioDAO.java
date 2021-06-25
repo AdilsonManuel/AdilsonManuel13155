@@ -35,7 +35,7 @@ public class MunicipioDAO
     {
         if (municipioModelo != null)
         {
-            String sql = "INSERT INTO public.muncipio(nome, provincia_fk) VALUES (?, ?);";
+            String sql = "INSERT INTO public.municipio(nome, provincia_fk) VALUES (?, ?);";
             try (PreparedStatement pst = this.conexaoBD.prepareStatement (sql))
             {
                 pst.setString (1 , municipioModelo.getNome ());
@@ -52,7 +52,7 @@ public class MunicipioDAO
 
     public List<MunicipioModelo> getListaMunicipio () throws SQLException , ClassNotFoundException
     {
-        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.muncipio ORDER BY muncipio_pk ASC"))
+        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.municipio ORDER BY municipio_pk ASC"))
         {
             List<MunicipioModelo> listaModelos = new ArrayList<> ();
             ResultSet rs = pst.executeQuery ();
@@ -60,7 +60,7 @@ public class MunicipioDAO
             while (rs.next ())
             {
                 MunicipioModelo municipioModelo = new MunicipioModelo ();
-                municipioModelo.setMuncipio_pk (rs.getInt ("muncipio_pk"));
+                municipioModelo.setMuncipio_pk (rs.getInt ("municipio_pk"));
                 municipioModelo.setNome (rs.getString ("nome"));
                 municipioModelo.setProvinciaModelo (new ProvinciaDAO ().getDadosProvincia (rs.getInt (" provincia_fk")));
 
@@ -75,7 +75,7 @@ public class MunicipioDAO
 
     public List<MunicipioModelo> getMunicipioPK (int municipioPK) throws SQLException , ClassNotFoundException
     {
-        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.muncipio WHERE muncipio_pk=? ORDER BY muncipio_pk ASC"))
+        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.municipio WHERE municipio_pk=? ORDER BY municipio_pk ASC"))
         {
             List<MunicipioModelo> listaModelos = new ArrayList<> ();
             ResultSet rs = pst.executeQuery ();
@@ -84,7 +84,7 @@ public class MunicipioDAO
             while (rs.next ())
             {
                 MunicipioModelo municipioModelo = new MunicipioModelo ();
-                municipioModelo.setMuncipio_pk (rs.getInt ("muncipio_pk"));
+                municipioModelo.setMuncipio_pk (rs.getInt ("municipio_pk"));
                 municipioModelo.setNome (rs.getString ("nome"));
                 municipioModelo.setProvinciaModelo (new ProvinciaDAO ().getDadosProvincia (rs.getInt (" provincia_fk")));
 
@@ -97,9 +97,9 @@ public class MunicipioDAO
 
     }
 
-    public MunicipioModelo getDadosMunicipio (int muncipio_pk) throws SQLException , ClassNotFoundException
+    public MunicipioModelo getDadosMunicipio (int municipio_pk) throws SQLException , ClassNotFoundException
     {
-        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.muncipio WHERE muncipio_pk=" + muncipio_pk))
+        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.municipio WHERE municipio_pk=" + municipio_pk))
         {
             MunicipioModelo municipioModelo = new MunicipioModelo ();
             ResultSet rs = pst.executeQuery ();
@@ -120,7 +120,7 @@ public class MunicipioDAO
 
     public boolean alterarMunicipio (MunicipioModelo municipioModelo) throws SQLException
     {
-        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("UPDATE public.muncipio SET nome=?, provincia_fk=? WHERE muncipio_pk=?"))
+        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("UPDATE public.municipio SET nome=?, provincia_fk=? WHERE municipio_pk=?"))
         {
             pst.setString (1 , municipioModelo.getNome ());
             pst.setInt (1 , municipioModelo.getProvinciaModelo ().getProvincia_pk ());
@@ -135,8 +135,8 @@ public class MunicipioDAO
 
     public boolean eliminarMunicipio (MunicipioModelo municipioModelo) throws SQLException
     {
-        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("DELETE FROM public.muncipio\n"
-                + "	WHERE muncipio_pk=?"))
+        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("DELETE FROM public.municipio\n"
+                + "	WHERE municipio_pk=?"))
         {
             pst.setInt (1 , municipioModelo.getMuncipio_pk ());
 

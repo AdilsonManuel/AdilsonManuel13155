@@ -21,10 +21,16 @@
 
         <link rel = "stylesheet" type = "text/css" href = "css/mainForms.css"/>
         <link rel="icon" href="assets/logo.png">
-
         <link rel="stylesheet" href="css/bootstrap-5.0.0-dist/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="Calendar/jscal2.css" />
+        <link rel="stylesheet" type="text/css" href="Calendar/border-radius.css" />
+        <link rel="stylesheet" type="text/css" href="Calendar/gold.css" />
+        
         <script language="javascript" src="js/repopularCombo.js"></script>
         <script language="javascript" src="js/funcaoAuxiliar.js"></script>
+        <script src="Calendar/jscal2.js"></script>
+        <script src="Calendar/pt.js"></script>
+
 
     </head>
 
@@ -88,8 +94,18 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="txtData_nascimento">Data de nascimento</label>
-                                    <input type="date" name="txtData_nascimento" id="txtData_nascimento" class="form-control datepicker" required>
-                                    <div class="invalid-feedback">Digite selecione uma data válida.</div>
+                                    <input name="txtData_nascimento" id="txtData_nascimento" class="form-control datepicker" required>
+                                    <input type="button" value="data" id="btn_txtData_nascimento"/>
+                                    <script type="text/javascript">//<![CDATA[
+                                        var cal = Calendar.setup({
+                                            onSelect: function (cal) {
+                                                cal.hide()
+                                            },
+                                            showTime: true
+                                        });
+                                        cal.manageFields("btn_txtData_nascimento", "txtData_nascimento", "%Y / %m / %d");
+                                        //]]>
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -123,11 +139,18 @@
                         </div>
 
 
-                        <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="txtOperadora">Tipo email</label>
+                                <%= new HtmlComboBoxes ().select ("email" , "clienteForm" , "comboEmail" , "email_pk" , "dominio" , "" , "")%>
+                            </div>
 
-                            <label for="txtEmail">Email</label>
-                            <input type="email" name="txtEmail" id="txtEmail" class="form-control" required>
+                            <div class="col">
+                                <label for="txtEmail">Email</label>
+                                <input type="email" name="txtEmail" id="txtEmail" class="form-control" required>
+                            </div>
                         </div>
+
                     </fieldset>
 
                     <fieldset>
@@ -201,7 +224,7 @@
                                 class="btn btn-success"
                                 value="Cadastrar"
                                 onclick="guardarFormCliente('ClienteServlet?operacao=Cadastrar&&redirecionar=homeRoot.jsp')"
-                             />
+                                />
                             <button type="reset" class="btn btn-primary-outline">
                                 Limpar
                             </button>

@@ -8,6 +8,7 @@ package DAO;
 import Modelo.ClienteModelo;
 import Modelo.PessoaModelo;
 import Modelo.ContaModelo;
+import Modelo.EstadoCivilModelo;
 import Modelo.PessoaModelo;
 import Modelo.SexoModelo;
 import java.sql.SQLException;
@@ -26,8 +27,12 @@ public class TesteDAO
         SexoDAO sexoDAO = new SexoDAO ();
         SexoModelo sexoModelo = new SexoModelo ();
         
-        sexoModelo.setNome ("Masculino");
-        System.out.println ("Genero -> "  + sexoDAO.getSexo_pk (sexoModelo.getNome ()));
+        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO ();
+        EstadoCivilModelo estadoCivilModelo = new EstadoCivilModelo ();
+        
+       estadoCivilModelo.setEstado_civili_pk (2);
+        System.out.println ("Genero -> "  + sexoDAO.getSexo_pk (sexoModelo.getSexo_pk ()));
+        System.out.println ("Situaçaõ -> "  + estadoCivilDAO.getEstadoCivil_pk (estadoCivilModelo.getEstado_civili_pk ()));
         
         PessoaModelo PessoaModelo = new PessoaModelo ();
         PessoaDAO pessoaDAO = new PessoaDAO ();
