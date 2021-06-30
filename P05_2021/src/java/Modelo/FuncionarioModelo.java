@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,13 +15,13 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class ClienteModelo extends PessoaModelo
+public class FuncionarioModelo extends PessoaModelo implements Serializable
 {
     private int pessoa_fk;
-    private int cliente_pk;
-    private int tipo_cliente_fk;
+    private int funcionario_pk;
+    private int tipo_funcionario_fk;
     
-    public ClienteModelo ()
+    public FuncionarioModelo ()
     {
     }
 

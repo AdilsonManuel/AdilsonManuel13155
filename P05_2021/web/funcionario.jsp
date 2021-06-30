@@ -64,7 +64,7 @@
                 <form class="main-form needs-validation" id="clienteForm" name="clienteForm" method="POST">
                     <fieldset>
                         <legend class="legenda col-md-8">
-                            Dados pessoais do cliente
+                            Dados pessoais do funcionario
                         </legend>
                         <div class="row">
                             <div class="col">
@@ -184,9 +184,9 @@
                     </div>
                     <div class="row">
                         <div class="form-control">
-                            <label for="comuna">Tipo cliente</label>
+                            <label for="comuna">Tipo Funcionario</label>
                             <%= new HtmlComboBoxes ().select ("tipo_cliente" , "clienteForm" ,
-                                    "cboTipoCLiente" , "tipo_cliente_pk" , "nome" , "" , "")%>
+                                    "cboTipoFuncionario" , "tipo_funcionario_pk" , "nome" , "" , "")%>
                         </div>
                     </div>
                     <hr>                     

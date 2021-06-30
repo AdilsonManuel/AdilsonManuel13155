@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
-
-import lombok.Data;
+package tabelas_excel;
 
 /**
  *
- * @author azm
+ * @author hermann
  */
-@Data
-public class EmailModelo
+public class TabelaLinhaException extends Exception
 {
-    private int email_pk,tipo_email_fk;
-    private String email;
+    public TabelaLinhaException()
+    {
+        
+    }
+    
 }

@@ -8,6 +8,10 @@
         <servlet-name>ClienteServlet</servlet-name>
         <servlet-class>ServLet.ClienteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FuncionarioServlet</servlet-name>
+        <servlet-class>ServLet.FuncionarioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContaServlet</servlet-name>
         <url-pattern>/ContaServlet</url-pattern>
@@ -24,6 +28,10 @@
         <error-code>404</error-code>
         <location>/404.html</location>
     </error-page>
+    <servlet-mapping>
+        <servlet-name>FuncionarioServlet</servlet-name>
+        <url-pattern>/FuncionarioServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

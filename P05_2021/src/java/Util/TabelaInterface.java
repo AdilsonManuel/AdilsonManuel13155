@@ -3,17 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
-
-import lombok.Data;
+package Util;
 
 /**
  *
  * @author azm
  */
-@Data
-public class EmailModelo
+import DAO.*;
+
+public interface TabelaInterface<T>
 {
-    private int email_pk,tipo_email_fk;
-    private String email;
+
+    public boolean create (T t);
+
+    public T find (T t);
+
+    public boolean update (T t);
+
+    public boolean insert (T t);
 }

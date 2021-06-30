@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.io.Serializable;
 import lombok.Data;
 
 /**
@@ -12,8 +13,7 @@ import lombok.Data;
  * @author azm
  */
 @Data
-public class EmailModelo
+public class ProdutoModelo implements Serializable
 {
-    private int email_pk,tipo_email_fk;
-    private String email;
+    
 }

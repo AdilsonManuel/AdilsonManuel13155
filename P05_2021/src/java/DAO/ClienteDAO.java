@@ -31,9 +31,12 @@ public class ClienteDAO
 
     public boolean inserirCliente (ClienteModelo clienteModelo) throws SQLException
     {
-        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("INSERT INTO public.cliente (pessoa_fk) VALUES (?)"))
+        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("INSERT INTO public.cliente(\n"
+                + "	pessoa_fk, tipo_cliente_fk)\n"
+                + "	VALUES ( ?, ?);"))
         {
             pst.setInt (1 , clienteModelo.getPessoa_fk ());
+            pst.setInt (2 , clienteModelo.getTipo_cliente_fk ());
 
             pst.execute ();
             pst.close ();
@@ -54,6 +57,7 @@ public class ClienteDAO
                 ClienteModelo clienteModelo = new ClienteModelo ();
                 clienteModelo.setCliente_pk (rs.getInt ("cliente_pk"));
                 clienteModelo.setPessoa_fk (rs.getInt ("pessoa_fk"));
+                clienteModelo.setTipo_cliente_fk (rs.getInt ("tipo_cliente_fk"));
 
                 listaClienteModelos.add (clienteModelo);
 
@@ -76,6 +80,7 @@ public class ClienteDAO
                 ClienteModelo clienteModelo = new ClienteModelo ();
                 clienteModelo.setCliente_pk (rs.getInt ("cliente_pk"));
                 clienteModelo.setPessoa_fk (rs.getInt ("pessoa_fk"));
+                clienteModelo.setTipo_cliente_fk (rs.getInt ("tipo_cliente_fk"));
 
                 listaClienteModelos.add (clienteModelo);
 
@@ -103,7 +108,7 @@ public class ClienteDAO
         try
         {
             ResultSet rs;
-            String query = "SELECT * FROM public.cliente WHERE nome = "+nome;
+            String query = "SELECT * FROM public.cliente WHERE nome = " + nome;
 
             PreparedStatement pst = conexaoBD.prepareStatement (query);
 

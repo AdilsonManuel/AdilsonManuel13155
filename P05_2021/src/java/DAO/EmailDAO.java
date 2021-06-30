@@ -28,28 +28,28 @@ public class EmailDAO
 
     public boolean inserirEmail (EmailModelo emailModelo) throws SQLException
     {
-        String sql = "INSERT INTO public.email(dominio) VALUES (?);";
+        String sql = "INSERT INTO public.email(\n"
+                + "	 nome, tipo_email_fk)\n"
+                + "	VALUES (?, ?);";
 
         try (PreparedStatement pst = conexaoBD.prepareStatement (sql))
         {
-            pst.setString (1 , emailModelo.getDominio ());
+            pst.setString (1 , emailModelo.getEmail ());
+            pst.setInt (2 , emailModelo.getTipo_email_fk ());
             pst.execute ();
             pst.close ();
         }
         return false;
     }
 
-    public int getEmail_pk (String email_pk) throws SQLException
+    public int getEmail_pk () throws SQLException
     {
-        try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT email_pk FROM public.email WHERE = " + email_pk))
+        try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT MAX(public.email.email_pk) FROM public.email"))
         {
             ResultSet rs = pst.executeQuery ();
+            rs.next ();
 
-            if (rs.getInt (1) != 0)
-            {
-                return rs.getInt ("email_pk");
-            }
+            return rs.getInt (1);
         }
-        return 0;
     }
 }

@@ -71,7 +71,7 @@
                         <li class="dropdown">
                             <a href="#"><span>Funcionário</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
-                                <li><a href="#">Cadastrar</a></li>
+                                <li><a href="funcionario.jsp">Cadastrar</a></li>
                                 <li><a href="#">Visualizar</a></li>
                             </ul>
                         </li>
@@ -93,7 +93,7 @@
                                     <a href="#"><span>Portofolios</span> <i class="bi bi-chevron-right"></i></a>
                                     <ul>
                                         <li><a href="#">Carregar Localização</a></li>
-                                        <li><a href="#">Carregar Portofólio</a></li>
+                                        <li><a href="#">Carregar produto</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Telefone</a></li>

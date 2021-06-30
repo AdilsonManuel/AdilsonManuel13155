@@ -14,6 +14,6 @@ import lombok.Data;
 @Data
 public class TelefoneModelo
 {
-    private int telefone_pk;
-    private String operadora,numero;
+    private int telefone_pk,tipo_telefonefk;
+    private String numero;
 }
