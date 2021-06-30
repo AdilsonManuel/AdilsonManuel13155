@@ -1,0 +1,295 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 19, 2021, 12:49:44 AM
+    Author     : azm
+*/
+
+
+body
+{
+    background-image: linear-gradient(90deg,#3498db,#8e44ad);
+    background-position:top center;
+    margin:0px;
+    font-family: 'Microsoft JhengHei', 'Segoe UI', Tahoma;
+}
+
+
+/*********************************Estilos das DIVS****************************************/
+
+/*********************************DIVS de Layout****************************************/
+#container
+ {
+    width: 890px;
+    margin: 4px auto 9px auto;
+    border:1px solid #999;
+    -moz-box-shadow: 0pt 0pt 10px #555;
+}
+
+#logo
+{
+    background-image: linear-gradient(180deg,#3498db,#8e44ad);
+    width:100%;
+    overflow:hidden;
+    height:150px;
+}
+
+#logotipo
+{
+    float: left;
+    width: 276px;
+    height: 233px;
+}
+
+.posicaocima
+{
+    float: right; 
+    width: 350px;
+}
+
+#data, #nomeuser
+{
+    color:#FFF;
+    padding:20px 10px 0px 0px; 
+    font-size: 13px;
+    text-align: right;
+}
+
+#nomeuser
+{
+    margin-top: 10px;
+}
+
+#nomeuser a:link, #nomeuser a:visited
+{
+    color:#0099FF;
+    text-decoration: none;
+}
+
+#nomeuser a:hover
+{
+    text-decoration: underline;
+}
+
+#nomeuser span
+{
+    border-bottom: 1px dashed #CCC;
+}
+
+
+#conteudo
+{
+    background: #FFF url(../fundos/2.png) no-repeat;
+    background-position: bottom left;
+    padding: 30px 0px;
+}
+
+/*********************************DIVS de apresentacao****************************************/
+#apresentacao
+{
+    padding-top: 10px;
+    margin:0px auto;
+    line-height: 140%;
+    width:500px;
+}
+
+
+#apresentacao div a:link, #apresentacao div a:visited
+{
+    font-size: 14px;
+    width: 50px;
+    padding:5px;
+    text-decoration:none;
+    border:1px outset #2C1800;
+    border-top:3px solid #02b5de;
+    color:#000;
+}
+
+#apresentacao div a:hover
+{
+    font-weight:700;
+    width: 50px;
+    padding:5px;
+    border:1px inset #2C1800;
+    border-top:3px solid #CCC;
+    color:#000;
+}
+
+/*********************************DIVS de Conteudo****************************************/
+#centrada
+{
+    padding-top: 10px;
+    margin:0px auto;
+    line-height: 140%;
+}
+
+#centrada h1, #apresentacao h1, #login h1
+{
+    text-align: center;
+    font-size: 19px;
+    border-bottom: 2px solid #02b5de;
+}
+
+.tabelasVisual td
+{
+    border:1px solid #333;
+}
+
+.odd
+{
+    background-color:#EEE;
+}
+
+#centrada p, #apresentacao p
+{
+    text-align:justify;
+    padding: 10px 0px;
+    text-indent: 25px;
+    font-size: 13px;
+}
+
+#centrada p span, #apresentacao p span
+{
+    font-weight:600;
+}
+
+
+#centradacontrole label
+{
+    padding-top:5px;
+    width: 100px;
+    float:left;
+}
+
+#cliente label
+{
+    padding-top:5px;
+    width: 150px;
+    float:left;
+}
+
+#centradacontrole input, #cliente input
+{
+    margin-top:7px;
+    border:1px solid #CCC;
+}
+
+#centradacontrole input:hover, #cliente input:hover
+{
+    margin-top:7px;
+    border:1px inset #CCC;
+}
+
+#centradacontrole select, #cliente select
+{
+    width: 190px;
+    margin-top:7px;
+    border:1px solid #CCC;
+}
+
+#centradacontrole,  #cliente
+{
+    font-size: 13px;
+    padding-right:30px;
+    border-bottom: 3px solid #999900;
+    width:430px;
+    margin:0 auto;
+}
+
+#centradacontrole h2, #cliente h2
+{
+    text-align: center;
+    font-size: 16px;
+}
+
+#visualizacao
+{
+    padding-left:30px;
+    font-size: 13px;
+}
+
+#visualizacao #tabelacao
+{
+    height:300px;
+    width:400px;
+    overflow: auto;
+    margin:0 auto;
+}
+
+
+#visualizacao h2
+{
+    text-align: center;
+    font-size: 16px;
+}
+
+#tabelacao a:link, #tabelacao a:visited
+{
+    text-decoration: none;
+    color:#0000FF;
+}
+
+#tabelacao a:hover
+{
+    text-decoration: underline;
+}
+
+.centrar
+{
+    margin:0px auto;
+    width: 200px;
+}
+
+
+/************************************************************************************************/
+
+
+
+#Rodape
+{
+    padding: 10px 0px;
+    margin: 0 auto;
+    line-height:5px;
+}
+
+#Rodape p
+{
+    color:#FFF;
+    text-align:center;
+    font-size:10px;
+    font-family:Arial;
+}
+
+
+/*************************Divs do Login *********************/
+
+
+#login
+{
+    font-size: 13px;
+    margin: 0px auto;
+    padding-top: 10px;
+    width: 510px;
+}
+
+#login label
+{
+    padding-top:5px;
+    width: 25%;
+    float:left;
+}
+
+#login input
+{
+    margin-top:7px;
+    border:1px solid #CCC;
+}
+
+#login input:hover
+{
+    margin-top:7px;
+    border:1px inset #CCC;
+}
