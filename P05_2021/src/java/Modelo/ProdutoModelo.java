@@ -15,5 +15,13 @@ import lombok.Data;
 @Data
 public class ProdutoModelo implements Serializable
 {
-    
+
+    private int produto_pk, fornecedor_fk, quantidade;
+    private Double preco;
+    private String designacao, imagem, portfolio_fk, data_registro;
+
+    public ProdutoModelo ()
+    {
+
+    }
 }

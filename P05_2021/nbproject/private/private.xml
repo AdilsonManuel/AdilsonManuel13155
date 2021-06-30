@@ -3,26 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/ServLet/FuncionarioServlet.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/Modelo/LocalizacaoModelo.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/Util/ListUtil.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/tabelas_excel/ExcelFileReader.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/Util/HtmlComboBoxes.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/DAO/TesteDAO.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/DAO/PaisDAO.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/ServLet/ClienteServlet.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/DAO/ComunaDAO.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/web/homeRoot.jsp</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/web/cliente.jsp</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/DAO/LocalizacaoDAO.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/web/404.html</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/DAO/EstadoCivilDAO.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/Modelo/FuncionarioModelo.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/DAO/FuncionarioDAO.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/web/funcionario.jsp</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/DAO/PortfolioDAO.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/DAO/SexoDAO.java</file>
-            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/web/login.jsp</file>
+            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/DAO/ClienteDAO.java</file>
+            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/DAO/VendaDAO.java</file>
+            <file>file:/home/azm/Documents/UCAN/3%20º%20ano/Sistemas%20Distribuídos%20e%20Paralelos%20I/Projectos/AdilsonManuel13155/P05_2021/src/java/Modelo/ProdutoModelo.java</file>
         </group>
     </open-files>
 </project-private>
