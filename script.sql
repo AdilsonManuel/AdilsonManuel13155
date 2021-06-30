@@ -13,8 +13,8 @@ CREATE DATABASE ucandb;
 
 USE ucandb;
 
-    CREATE TABLE portofolio (portofolio_pk  CHARACTER VARYING (45) NOT NULL PRIMARY KEY,designacao CHARACTER VARYING (45) NOT NULL,
-                                 portofolio_fk_pai  CHARACTER VARYING (45),CONSTRAINT portofolio_fk_pai FOREIGN KEY(portofolio_fk_pai) REFERENCES portofolio(portofolio_pk) MATCH SIMPLE);
+    CREATE TABLE portfolio (portfolio_pk  CHARACTER VARYING (45) NOT NULL PRIMARY KEY,designacao CHARACTER VARYING (45) NOT NULL,
+                                 portfolio_fk_pai  CHARACTER VARYING (45),CONSTRAINT portfolio_fk_pai FOREIGN KEY(portfolio_fk_pai) REFERENCES portfolio(portfolio_pk) MATCH SIMPLE);
 
     CREATE TABLE localizacao (pkSeq SERIAL NOT NULL,localizacao_pk CHARACTER VARYING (45) NOT NULL PRIMARY KEY, designacao CHARACTER VARYING (45) NOT NULL,
                             eh_distrito boolean NOT NULL, localizacao_fk_pai  CHARACTER VARYING (45),ehNivel CHARACTER VARYING (45) NOT NULL,
@@ -77,14 +77,21 @@ USE ucandb;
                               CONSTRAINT pessoa_fk FOREIGN KEY(pessoa_fk) REFERENCES pessoa(pessoa_pk) MATCH SIMPLE,
                               CONSTRAINT tipo_funcionario_fk FOREIGN KEY(tipo_funcionario_fk) REFERENCES tipo_funcionario(tipo_funcionario_pk) MATCH SIMPLE);
 
-    CREATE TABLE fornecedor (fornecedor_pk SERIAL NOT NULL PRIMARY KEY, pessoa_fk INTEGER NOT NULL,
-                              CONSTRAINT pessoa_fk FOREIGN KEY(pessoa_fk) REFERENCES pessoa(pessoa_pk) MATCH SIMPLE);
-
-    CREATE TABLE produto (produto_pk  CHARACTER VARYING (45) NOT NULL PRIMARY KEY,designacao CHARACTER VARYING (45) NOT NULL,
-                                 produto_fk_pai  CHARACTER VARYING (45),CONSTRAINT produto_fk_pai FOREIGN KEY(produto_fk_pai) REFERENCES produto(produto_pk) MATCH SIMPLE);
+    CREATE TABLE fornecedor (fornecedor_pk SERIAL NOT NULL PRIMARY KEY,nome CHARACTER VARYING(45) NOT NULL);
+                             
+    CREATE TABLE produto (produto_pk integer NOT NULL DEFAULT nextval('produto_produto_pk_seq'::regclass),
+                                 designacao character varying(45) COLLATE pg_catalog."default" NOT NULL,
+                                 imagem character varying(45) COLLATE pg_catalog."default",
+                                 portfolio_fk character varying(45) COLLATE pg_catalog."default" NOT NULL,
+                                 preco double precision NOT NULL,
+                                 fornecedor_fk integer NOT NULL,
+                                 quantidade integer NOT NULL,
+                                 data_registro character varying(45) COLLATE pg_catalog."default" NOT NULL,
+                                 portfolio_fk  CHARACTER VARYING (45),CONSTRAINT portfolio_fk FOREIGN KEY(portfolio_fk) REFERENCES portfolio(portfolio_pk) MATCH SIMPLE,
+                                 fornecedor_fk  CHARACTER VARYING (45),CONSTRAINT fornecedor_fk FOREIGN KEY(fornecedor_fk) REFERENCES fornecedor(fornecedor_pk) MATCH SIMPLE);
 
     CREATE TABLE stock (stock_pk  SERIAL NOT NULL PRIMARY KEY,designacao CHARACTER VARYING (45) NOT NULL,valor DOUBLE PRECISION NOT NULL,limite_maximo integer NOT NULL,
-                                   produto_fk  CHARACTER VARYING (45),CONSTRAINT produto_fk FOREIGN KEY(produto_fk) REFERENCES produto(produto_pk) MATCH SIMPLE);
+                                   produto_fk  INTEGER NOT NULL,CONSTRAINT produto_fk FOREIGN KEY(produto_fk) REFERENCES produto(produto_pk) MATCH SIMPLE);
 
     CREATE TABLE forma_pagamento (forma_pagamento_pk SERIAL NOT NULL PRIMARY KEY, designacao CHARACTER VARYING(45) NOT NULL);
 
@@ -95,7 +102,7 @@ USE ucandb;
                                    CONSTRAINT forma_pagamento_fk FOREIGN KEY(forma_pagamento_fk) REFERENCES forma_pagamento(forma_pagamento_pk) MATCH SIMPLE);
 
     CREATE TABLE item_venda (item_venda_pk  SERIAL NOT NULL PRIMARY KEY,quantidade INTEGER NOT NULL,total NUMERIC(10,2) NOT NULL,
-                                   venda_fk INTEGER NOT NULL, produto_fk CHARACTER VARYING(45) NOT NULL,
+                                   venda_fk INTEGER NOT NULL,  produto_fk  INTEGER NOT NULL,
                                    CONSTRAINT venda_fk FOREIGN KEY(venda_fk) REFERENCES venda(venda_pk) MATCH SIMPLE,
                                    CONSTRAINT produto_fk FOREIGN KEY(produto_fk) REFERENCES produto(produto_pk) MATCH SIMPLE);
    
@@ -1288,6 +1295,10 @@ INSERT INTO tipo_conta(nome) VALUES('root');
 INSERT INTO tipo_conta(nome) VALUES('admin');
 INSERT INTO tipo_conta(nome) VALUES('funcionario');
 INSERT INTO tipo_conta(nome) VALUES('cliente');
+
+
+INSERT INTO fornecedor(nome) VALUES('superAfrica');
+
 
 INSERT INTO conta (tipo_conta_fk,nome_usuario, senha_usuario) VALUES(1, 'root','root');
 INSERT INTO conta (tipo_conta_fk,nome_usuario, senha_usuario) VALUES(2, 'admin','admin');
