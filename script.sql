@@ -52,12 +52,10 @@ USE ucandb;
                         data_nascimento  CHARACTER VARYING(45) NOT NULL,
                         sexo_fk INTEGER NOT NULL,
                         estado_civil_fk INTEGER NOT NULL,
-                        endereco_fk INTEGER NOT NULL, 
                         telefone_fk INTEGER NOT NULL,
-                        email_fk INTEGER NOT NULL,
                         CONSTRAINT estado_civil_fk FOREIGN KEY(estado_civil_fk) REFERENCES estado_civil(estado_civil_pk) MATCH SIMPLE,
-                        CONSTRAINT endereco_fk FOREIGN KEY(endereco_fk) REFERENCES endereco(endereco_pk) MATCH SIMPLE,
-                        CONSTRAINT telefone_fk FOREIGN KEY(telefone_fk) REFERENCES telefone(telefone_pk) MATCH SIMPLE);
+                        CONSTRAINT telefone_fk FOREIGN KEY(telefone_fk) REFERENCES telefone(telefone_pk) MATCH SIMPLE,
+                        CONSTRAINT sexo_fk FOREIGN KEY(sexo_fk) REFERENCES sexo(sexo_pk) MATCH SIMPLE);
     
     CREATE TABLE tipo_conta (tipo_conta_pk SERIAL NOT NULL PRIMARY KEY, nome CHARACTER VARYING(45) NOT NULL);
 
@@ -70,6 +68,29 @@ USE ucandb;
     CREATE TABLE cliente (cliente_pk SERIAL NOT NULL PRIMARY KEY, pessoa_fk INTEGER NOT NULL,tipo_cliente_fk INTEGER NOT NULL,
                             CONSTRAINT pessoa_fk FOREIGN KEY(pessoa_fk) REFERENCES pessoa(pessoa_pk) MATCH SIMPLE,
                             CONSTRAINT tipo_cliente_fk FOREIGN KEY(tipo_cliente_fk) REFERENCES tipo_cliente(tipo_cliente_Pk) MATCH SIMPLE);
+
+                            
+    CREATE TABLE pais (pais_pk SERIAL NOT NULL PRIMARY KEY , 
+                  nome CHARACTER VARYING(45) NOT NULL );
+
+     CREATE TABLE categoria (categoria_pk SERIAL NOT NULL PRIMARY KEY , 
+                  nome CHARACTER VARYING(45) NOT NULL );
+
+
+    CREATE TABLE provincia (provincia_pk SERIAL NOT NULL PRIMARY KEY, 
+                            nome CHARACTER VARYING(45) NOT NULL ,
+                            pais_fk INT NOT NULL ,
+                            CONSTRAINT  pais_fk FOREIGN KEY(pais_fk) REFERENCES pais(pais_pk) MATCH SIMPLE);
+
+    CREATE TABLE muncipio (muncipio_pk SERIAL NOT NULL PRIMARY KEY,
+                           nome CHARACTER VARYING(45) NOT NULL ,
+                           provincia_fk INT NOT NULL ,
+                           CONSTRAINT provincia_fk FOREIGN KEY(provincia_fk) REFERENCES provincia(provincia_pk) MATCH SIMPLE);
+
+    CREATE TABLE comuna (comuna_pk SERIAL NOT NULL PRIMARY KEY,
+                           nome CHARACTER VARYING(45) NOT NULL ,
+                           muncipio_fk INT NOT NULL ,
+                           CONSTRAINT muncipio_fk FOREIGN KEY(muncipio_fk) REFERENCES muncipio(muncipio_pk) MATCH SIMPLE);
 
     CREATE TABLE tipo_funcionario (tipo_funcionario_pk SERIAL NOT NULL PRIMARY KEY, nome CHARACTER VARYING(45) NOT NULL);
 
@@ -147,6 +168,12 @@ USE ucandb;
   
 INSERT INTO pais (nome) VALUES('Angola');
 
+INSERT INTO categoria (nome) VALUES('Apartamento');
+INSERT INTO categoria (nome) VALUES('Sala/Escritorio');
+INSERT INTO categoria (nome) VALUES('Rural');
+INSERT INTO categoria (nome) VALUES('Predio comerical');
+INSERT INTO categoria (nome) VALUES('casa');
+INSERT INTO categoria (nome) VALUES('Terreno');
 
 INSERT INTO provincia(nome,pais_fk) VALUES('Bengo',1);
 INSERT INTO provincia(nome,pais_fk) VALUES('Benguela',1);
