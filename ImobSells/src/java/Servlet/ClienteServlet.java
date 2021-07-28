@@ -39,7 +39,7 @@ import util.ConstantesProjecto;
  *
  * @author azm
  */
-@WebServlet(name = "ContaServlet" , urlPatterns = "/ServLet/ContaServlet")
+@WebServlet(name = "ContaServlet", urlPatterns = "/ServLet/ContaServlet")
 public class ClienteServlet extends HttpServlet
 {
 
@@ -52,8 +52,8 @@ public class ClienteServlet extends HttpServlet
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest (HttpServletRequest request , HttpServletResponse response)
-            throws ServletException , IOException
+    protected void processRequest (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
     {
         response.setContentType ("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter ())
@@ -63,7 +63,7 @@ public class ClienteServlet extends HttpServlet
     }
 
     @Override
-    protected void service (HttpServletRequest req , HttpServletResponse resp) throws ServletException , IOException
+    protected void service (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         resp.setContentType ("text/html;charset=UTF-8");
         try (PrintWriter out = resp.getWriter ())
@@ -113,14 +113,35 @@ public class ClienteServlet extends HttpServlet
                 telefoneModelo.setNumero (req.getParameter ("txtTelefone"));
                 emailModelo.setNome (req.getParameter ("txtEmail"));
 
+                String paisID = req.getParameter ("comboPais");
+//                localizacaoModelo.setLocalizacao_pk ("1");
+
+                String provinciaID = req.getParameter ("comboProvincia");
+                String MuniccipioID = req.getParameter ("comboMunicipio");
+
+                String ruaID = req.getParameter ("txtRua");
+                String numero_casaID = req.getParameter ("txtNumero_casa");
+
+//                System.out.println ("Servlet.ClienteServlet.service()" + localizacaoDAO.findLocalidade (MuniccipioID));
                 String nome = req.getParameter ("txtnome");
                 String data_nascimento = req.getParameter ("txtData_nascimento");
 
+                LocalizacaoModelo local = localizacaoDAO.findLocalidade (MuniccipioID);
+                enderecoModelo.setNumero_casa (numero_casaID);
+                enderecoModelo.setRua (ruaID);
+                enderecoModelo.setLocalizacaoModelo (local);
+                
+//                System.out.println ("Servlet.ClienteServlet.service() ->"+enderecoModelo.toString ());
+
+                enderecoDAO.inserirEndereco (enderecoModelo);
+                telefoneDAO.inserirTelefone (telefoneModelo);
+                emailDAO.inserirEmail (emailModelo);
+
                 int sexoID = sexoModelo.getSexo_pk ();
                 int estado_civilID = estadoCivilModelo.getEstado_civili_pk ();
-                int telefoneID = telefoneModelo.getTelefone_pk ();
-                int enderecoID = enderecoModelo.getEndereco_pk ();
-                int emailID = emailModelo.getEmail_pk ();
+                int telefoneID = telefoneDAO.pegarUltimoTelefone ();
+                int enderecoID = enderecoDAO.pegarUltimoEndereco ();
+                int emailID = emailDAO.pegarUltimoEmail ();
 
                 pessoaModelo.setNome (nome);
                 pessoaModelo.setData_nascimento (data_nascimento);
@@ -130,14 +151,15 @@ public class ClienteServlet extends HttpServlet
                 pessoaModelo.setTelefone_fk (telefoneDAO.getTelefone (telefoneID));
                 pessoaModelo.setEmail_fk (emailDAO.getEmail_pk (emailID));
 
+//                System.out.println ("Servlet.ClienteServlet.service()" + pessoaModelo.toString ());
+
                 pessoaDAO.inserirPessoa (pessoaModelo);
                 int ultima_pessoa = pessoaDAO.getUltimaPessoa ();
-
                 int cboTipoCLiente = Integer.parseInt (req.getParameter ("comboTipoCLiente"));
                 clienteModelo.setTipo_cliente_fk (cboTipoCLiente);
                 clienteModelo.setPessoa_fk (ultima_pessoa);
                 clienteDAO.inserirCliente (clienteModelo);
-
+//                System.out.println ("Servlet.ClienteServlet.service()" + clienteModelo.toString ());
                 // imprime o nome do cliente que foi adicionado
                 out.println ("<html>");
                 out.println ("<body>");
@@ -147,16 +169,15 @@ public class ClienteServlet extends HttpServlet
                 out.println ("</html>");
 
                 resp.sendRedirect (redirecionar);
-
             }
         }
         catch (ClassNotFoundException ex)
         {
-            Logger.getLogger (ClienteServlet.class.getName ()).log (Level.SEVERE , null , ex);
+            Logger.getLogger (ClienteServlet.class.getName ()).log (Level.SEVERE, null, ex);
         }
         catch (SQLException ex)
         {
-            Logger.getLogger (ClienteServlet.class.getName ()).log (Level.SEVERE , null , ex);
+            Logger.getLogger (ClienteServlet.class.getName ()).log (Level.SEVERE, null, ex);
         }
 
     }
@@ -171,10 +192,10 @@ public class ClienteServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet (HttpServletRequest request , HttpServletResponse response)
-            throws ServletException , IOException
+    protected void doGet (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
     {
-        processRequest (request , response);
+        processRequest (request, response);
     }
 
     /**
@@ -186,10 +207,10 @@ public class ClienteServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost (HttpServletRequest request , HttpServletResponse response)
-            throws ServletException , IOException
+    protected void doPost (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
     {
-        processRequest (request , response);
+        processRequest (request, response);
     }
 
     /**

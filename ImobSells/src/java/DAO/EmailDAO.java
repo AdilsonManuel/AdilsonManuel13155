@@ -40,6 +40,16 @@ public class EmailDAO
         }
         return false;
     }
+    
+    public int pegarUltimoEmail() throws SQLException{
+        try(PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT MAX(PUBLIC.email.email_pk) FROM PUBLIC.email"))
+        {
+            ResultSet rs = pst.executeQuery ();
+            rs.next ();
+            
+            return rs.getInt (1);
+        }
+    }
 
     public EmailModelo getEmail_pk (int email_pk) throws SQLException
     {

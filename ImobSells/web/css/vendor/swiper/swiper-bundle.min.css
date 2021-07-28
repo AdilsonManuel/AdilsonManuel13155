@@ -7,8 +7,8 @@
  *
  * Released under the MIT License
  *
- * Released on: January 29, 2021
- */
+ * Released on: January 29, 2021*/
+ 
 
 @font-face {
   font-family: swiper-icons;
@@ -433,7 +433,7 @@ button.swiper-pagination-bullet {
   transform-origin: 50%;
   animation: swiper-preloader-spin 1s infinite linear;
   box-sizing: border-box;
-  border: 4px solid var(--swiper-preloader-color, var(--swiper-theme-color));
+    border: 4px solid var(--swiper-preloader-color, var(--swiper-theme-color);
   border-radius: 50%;
   border-top-color: transparent;
 }

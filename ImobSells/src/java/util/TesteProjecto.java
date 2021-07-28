@@ -89,6 +89,9 @@ public class TesteProjecto
         pessoaModelo.setEmail_fk (emailDAO.getEmail_pk (emailID));
         
         System.out.println ("Pessoa modelo ->" + pessoaModelo.toString ());
+        System.out.println ("Last address ->" + telefoneDAO.pegarUltimoTelefone ());
+        System.out.println ("Last address ->" + emailDAO.pegarUltimoEmail ());
+        System.out.println ("Last address ->" + enderecoDAO.pegarUltimoEndereco ());
 
 //        pessoaDAO.inserirPessoa (pessoaModelo);
     }

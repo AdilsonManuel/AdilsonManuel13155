@@ -33,8 +33,8 @@
         <link rel="stylesheet" type="text/css" href="Calendar/border-radius.css" />
         <link rel="stylesheet" type="text/css" href="Calendar/gold.css" />
 
-        <script language="javascript" src="js/repopularCombo.js"></script>
-        <!--<script language="javascript" src="js/funcaoAuxiliar.js"></script>-->
+        <!--<script language="javascript" src="js/repopularCombo.js"></script>-->
+        <script language="javascript" src="js/funcaoAuxiliar.js"></script>
         <script src="Calendar/jscal2.js"></script>
         <script src="Calendar/pt.js"></script>
 
@@ -192,7 +192,7 @@
                             <div class="row">
                                 <div class="form-control">
                                     <label for="municipio">Municipio</label>
-                                    <%= new HtmlComboBoxes ().selectLocalizacao ("localizacao" , "clienteForm" , "comboProvincia" , "localizacao_pk" , "designacao" , "" , "" , "3")%>
+                                    <%= new HtmlComboBoxes ().selectLocalizacao ("localizacao" , "clienteForm" , "comboMunicipio" , "localizacao_pk" , "designacao" , "" , "" , "3")%>
 
                                 </div>
                             </div>

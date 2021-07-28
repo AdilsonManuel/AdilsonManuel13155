@@ -17,15 +17,14 @@ public class EnderecoModelo implements Serializable
 {
 
     private int endereco_pk;
-    private int numero_casa;
-    private String rua;
+    private String rua, numero_casa;
     private LocalizacaoModelo localizacaoModelo;
 
-    public EnderecoModelo (int endereco_pk , int numero_casa , String rua , LocalizacaoModelo localizacaoModelo)
+    public EnderecoModelo (int endereco_pk, String rua, String numero_casa, LocalizacaoModelo localizacaoModelo)
     {
         this.endereco_pk = endereco_pk;
-        this.numero_casa = numero_casa;
         this.rua = rua;
+        this.numero_casa = numero_casa;
         this.localizacaoModelo = localizacaoModelo;
     }
 

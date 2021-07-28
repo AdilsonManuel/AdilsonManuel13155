@@ -21,7 +21,7 @@ public class TelefoneDAO
 
     private Connection conexaoBD;
 
-    public TelefoneDAO () throws ClassNotFoundException , SQLException
+    public TelefoneDAO () throws ClassNotFoundException, SQLException
     {
         this.conexaoBD = new ConexaoBD ().getConnection ();
     }
@@ -34,16 +34,27 @@ public class TelefoneDAO
 
         try (PreparedStatement pst = conexaoBD.prepareStatement (sql))
         {
-            pst.setString (1 , telefoneModelo.getNumero ());
+            pst.setString (1, telefoneModelo.getNumero ());
             pst.execute ();
             pst.close ();
         }
         return false;
     }
 
+    public int pegarUltimoTelefone () throws SQLException
+    {
+        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT MAX(PUBLIC.telefone.telefone_pk) FROM PUBLIC.telefone"))
+        {
+            ResultSet rs = pst.executeQuery ();
+            rs.next ();
+
+            return rs.getInt (1);
+        }
+    }
+
     public TelefoneModelo getTelefone (int telefone_pk) throws SQLException
     {
-        try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT * FROM public.telefone WHERE telefone_pk="+telefone_pk))
+        try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT * FROM public.telefone WHERE telefone_pk=" + telefone_pk))
         {
             ResultSet rs = pst.executeQuery ();
             rs.next ();

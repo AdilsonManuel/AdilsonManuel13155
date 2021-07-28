@@ -23,7 +23,7 @@ public class EnderecoDAO
 
     private final Connection conexaoBD;
 
-    public EnderecoDAO () throws ClassNotFoundException , SQLException
+    public EnderecoDAO () throws ClassNotFoundException, SQLException
     {
         this.conexaoBD = new ConexaoBD ().getConnection ();
     }
@@ -34,11 +34,11 @@ public class EnderecoDAO
         {
 
             try (PreparedStatement pst = this.conexaoBD.prepareStatement ("INSERT INTO public.endereco( rua, numero_casa, localizacao_fk)"
-                    + " VALUES ( ?, ?, ?, ?)"))
+                    + " VALUES ( ?, ?, ?)"))
             {
-                pst.setString (1 , enderecoModelo.getRua ());
-                pst.setInt (2 , enderecoModelo.getNumero_casa ());
-                pst.setString (3 , enderecoModelo.getLocalizacaoModelo ().getLocalizacao_pk ());
+                pst.setString (1, enderecoModelo.getRua ());
+                pst.setString (2, enderecoModelo.getNumero_casa ());
+                pst.setString (3, enderecoModelo.getLocalizacaoModelo ().getLocalizacao_pk ());
 //                System.out.println ("DAO.EnderecoDAO.inserirEndereco()" + enderecoModelo.toString ());
                 pst.execute ();
                 pst.close ();
@@ -47,7 +47,7 @@ public class EnderecoDAO
         }
     }
 
-    public List<EnderecoModelo> getListaEndereco () throws SQLException , ClassNotFoundException
+    public List<EnderecoModelo> getListaEndereco () throws SQLException, ClassNotFoundException
     {
         try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.endereco ORDER BY endereco_pk ASC"))
         {
@@ -59,7 +59,7 @@ public class EnderecoDAO
                 {
                     EnderecoModelo enderecoModelo = new EnderecoModelo ();
                     enderecoModelo.setEndereco_pk (rs.getInt ("endereco_pk"));
-                    enderecoModelo.setNumero_casa (rs.getInt ("numero_casa"));
+                    enderecoModelo.setNumero_casa (rs.getString ("numero_casa"));
                     enderecoModelo.setRua (rs.getString ("rua"));
                     enderecoModelo.setLocalizacaoModelo (new LocalizacaoDAO ().findLocalidade (rs.getString ("localizacao_fk")));
 
@@ -72,19 +72,19 @@ public class EnderecoDAO
         }
     }
 
-    public List<EnderecoModelo> getListaEnderecoPK (int enderecoPK) throws SQLException , ClassNotFoundException
+    public List<EnderecoModelo> getListaEnderecoPK (int enderecoPK) throws SQLException, ClassNotFoundException
     {
         try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.endereco WHERE endereco_pk=? ORDER BY comuna_pk ASC"))
         {
             List<EnderecoModelo> listaEnderecoModelos = new ArrayList<> ();
             try (ResultSet rs = pst.executeQuery ())
             {
-                pst.setInt (1 , enderecoPK);
+                pst.setInt (1, enderecoPK);
                 while (rs.next ())
                 {
                     EnderecoModelo enderecoModelo = new EnderecoModelo ();
                     enderecoModelo.setEndereco_pk (rs.getInt ("endereco_pk"));
-                    enderecoModelo.setNumero_casa (rs.getInt ("numero_casa"));
+                    enderecoModelo.setNumero_casa (rs.getString ("numero_casa"));
                     enderecoModelo.setRua (rs.getString ("rua"));
                     enderecoModelo.setLocalizacaoModelo (new LocalizacaoDAO ().findLocalidade (rs.getString ("localizacao_fk")));
 
@@ -97,7 +97,7 @@ public class EnderecoDAO
         }
     }
 
-    public EnderecoModelo getDadosMunicipio (int endereco_pk) throws SQLException , ClassNotFoundException
+    public EnderecoModelo getDadosMunicipio (int endereco_pk) throws SQLException, ClassNotFoundException
     {
         try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM public.endereco WHERE endereco_pk=" + endereco_pk))
         {
@@ -108,7 +108,7 @@ public class EnderecoDAO
             if (rs.getInt ("endereco_pk") > 0)
             {
                 enderecoModelo.setEndereco_pk (rs.getInt ("endereco_pk"));
-                enderecoModelo.setNumero_casa (rs.getInt ("numero_casa"));
+                enderecoModelo.setNumero_casa (rs.getString ("numero_casa"));
                 enderecoModelo.setRua (rs.getString ("rua"));
                 enderecoModelo.setLocalizacaoModelo (new LocalizacaoDAO ().findLocalidade (rs.getString ("localizacao_fk")));
 
@@ -124,9 +124,9 @@ public class EnderecoDAO
         try (PreparedStatement pst = this.conexaoBD.prepareStatement ("UPDATE public.endereco SET  rua=?,"
                 + " numero_casa=?, localização_fk=? WHERE endereco_pk=?"))
         {
-            pst.setString (1 , enderecoModelo.getRua ());
-            pst.setInt (2 , enderecoModelo.getNumero_casa ());
-            pst.setString (3 , enderecoModelo.getLocalizacaoModelo ().getLocalizacao_pk ());
+            pst.setString (1, enderecoModelo.getRua ());
+            pst.setString (2, enderecoModelo.getNumero_casa ());
+            pst.setString (3, enderecoModelo.getLocalizacaoModelo ().getLocalizacao_pk ());
 
             pst.execute ();
             pst.close ();
@@ -139,7 +139,7 @@ public class EnderecoDAO
         try (PreparedStatement pst = this.conexaoBD.prepareStatement ("DELETE FROM public.endereco\n"
                 + "	WHERE endereco_pk=?"))
         {
-            pst.setInt (1 , enderecoModelo.getEndereco_pk ());
+            pst.setInt (1, enderecoModelo.getEndereco_pk ());
 
             pst.execute ();
             pst.close ();
@@ -147,24 +147,36 @@ public class EnderecoDAO
         }
     }
 
-    public EnderecoModelo getEndereco_pk (int endereco_pk) throws SQLException , ClassNotFoundException
+    public EnderecoModelo getEndereco_pk (int endereco_pk) throws SQLException, ClassNotFoundException
     {
         try (PreparedStatement pst = conexaoBD.prepareStatement ("SELECT * FROM public.endereco WHERE endereco_pk=" + endereco_pk))
         {
             ResultSet rs = pst.executeQuery ();
+            rs.next ();
+            EnderecoModelo enderecoModelo = new EnderecoModelo ();
 
-            if (rs.next ())
+            if (rs.getInt ("endereco_pk") > 0)
             {
 
-                EnderecoModelo enderecoModelo = new EnderecoModelo ();
                 enderecoModelo.setEndereco_pk (rs.getInt ("endereco_pk"));
                 enderecoModelo.setRua (rs.getString ("rua"));
-                enderecoModelo.setNumero_casa (rs.getInt ("numero_casa"));
+                enderecoModelo.setNumero_casa (rs.getString ("numero_casa"));
                 enderecoModelo.setLocalizacaoModelo (new LocalizacaoDAO ().findLocalidade (rs.getString ("localizacao_fk")));
                 return enderecoModelo;
             }
         }
         return null;
+    }
+
+    public int pegarUltimoEndereco () throws SQLException
+    {
+        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT MAX(PUBLIC.endereco.endereco_pk) FROM PUBLIC.endereco"))
+        {
+            ResultSet rs = pst.executeQuery ();
+            rs.next ();
+
+            return rs.getInt (1);
+        }
     }
 
 }

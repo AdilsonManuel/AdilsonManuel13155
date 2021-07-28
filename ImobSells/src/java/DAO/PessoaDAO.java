@@ -42,7 +42,7 @@ public class PessoaDAO
             pst.setInt (6 , pessoaModelo.getTelefone_fk ().getTelefone_pk ());
             pst.setInt (7 , pessoaModelo.getEmail_fk ().getEmail_pk ());
             
-            System.out.println ("DAO.PessoaDAO.inserirPessoa()"+pessoaModelo.toString ());
+//            System.out.println ("DAO.PessoaDAO.inserirPessoa()"+pessoaModelo.toString ());
 
             pst.execute ();
             pst.close ();

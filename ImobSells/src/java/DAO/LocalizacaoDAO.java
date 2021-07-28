@@ -38,22 +38,22 @@ public class LocalizacaoDAO implements TabelaInterface<LocalizacaoModelo>
 
         try (PreparedStatement pst = conexaoBD.prepareStatement (sql))
         {
-            pst.setString (1 , localizacaoModelo.getLocalizacao_pk ());
-            pst.setString (2 , localizacaoModelo.getDesignacao ());
-            pst.setBoolean (3 , localizacaoModelo.getEh_distrito ());
-            pst.setString (4 , localizacaoModelo.getLocalizacao_fk_pai ());
-            pst.setString (5 , localizacaoModelo.getEhNivel ());
+            pst.setString (1, localizacaoModelo.getLocalizacao_pk ());
+            pst.setString (2, localizacaoModelo.getDesignacao ());
+            pst.setBoolean (3, localizacaoModelo.getEh_distrito ());
+            pst.setString (4, localizacaoModelo.getLocalizacao_fk_pai ());
+            pst.setString (5, localizacaoModelo.getEhNivel ());
 
             if (!localizacaoModelo.getEh_distrito ())
             {
-                pst.setNull (3 , 0);
+                pst.setNull (3, 0);
             }
             else
             {
-                pst.setBoolean (3 , localizacaoModelo.getEh_distrito ());
+                pst.setBoolean (3, localizacaoModelo.getEh_distrito ());
             }
-            pst.setString (4 , localizacaoModelo.getEhNivel ());
-            pst.setString (5 , localizacaoModelo.getLocalizacao_fk_pai ());
+            pst.setString (4, localizacaoModelo.getEhNivel ());
+            pst.setString (5, localizacaoModelo.getLocalizacao_fk_pai ());
 
             if (pst.executeUpdate () > 0)
             {
@@ -64,7 +64,7 @@ public class LocalizacaoDAO implements TabelaInterface<LocalizacaoModelo>
         catch (SQLException ex)
         {
             String msg = "Falha na tentativa de criar um registo na tabela localizacao com a primária " + localizacaoModelo.getLocalizacao_pk ();
-            Logger.getLogger (LocalizacaoDAO.class.getName ()).log (Level.SEVERE , msg , ex);
+            Logger.getLogger (LocalizacaoDAO.class.getName ()).log (Level.SEVERE, msg, ex);
         }
         return false;
     }
@@ -79,8 +79,8 @@ public class LocalizacaoDAO implements TabelaInterface<LocalizacaoModelo>
 
         try (PreparedStatement pst = conexaoBD.prepareStatement (sql))
         {
-            pst.setString (1 , localizacaoModelo.getLocalizacao_pk ());
-            pst.setString (2 , localizacaoModelo.getEhNivel ());
+            pst.setString (1, localizacaoModelo.getLocalizacao_pk ());
+            pst.setString (2, localizacaoModelo.getEhNivel ());
 
             ResultSet rs = pst.executeQuery ();
 
@@ -97,7 +97,7 @@ public class LocalizacaoDAO implements TabelaInterface<LocalizacaoModelo>
         {
             String msg = "Falha na tentativa de localizar um registo na tabela localizacao "
                     + "com a chave primária " + localizacaoModelo1.getLocalizacao_pk () + ", " + localizacaoModelo1.getDesignacao ();
-            Logger.getLogger (LocalizacaoDAO.class.getName ()).log (Level.SEVERE , msg , ex);
+            Logger.getLogger (LocalizacaoDAO.class.getName ()).log (Level.SEVERE, msg, ex);
         }
         return null;
     }
@@ -111,8 +111,8 @@ public class LocalizacaoDAO implements TabelaInterface<LocalizacaoModelo>
 
         try (PreparedStatement pst = conexaoBD.prepareStatement (sql))
         {
-            pst.setInt (1 , localizacaoModelo.getPkSeq ());
-            pst.setString (2 , localizacaoModelo.getDesignacao ());
+            pst.setInt (1, localizacaoModelo.getPkSeq ());
+            pst.setString (2, localizacaoModelo.getDesignacao ());
 
             if (pst.executeUpdate () > 0)
             {
@@ -124,7 +124,7 @@ public class LocalizacaoDAO implements TabelaInterface<LocalizacaoModelo>
         {
             String msg = "Falha na tentativa de actualizar um registo na tabela"
                     + " localizacao com a chave primária " + localizacaoModelo.getLocalizacao_pk ();
-            Logger.getLogger (LocalizacaoDAO.class.getName ()).log (Level.SEVERE , msg , ex);
+            Logger.getLogger (LocalizacaoDAO.class.getName ()).log (Level.SEVERE, msg, ex);
         }
         return false;
 
@@ -150,10 +150,11 @@ public class LocalizacaoDAO implements TabelaInterface<LocalizacaoModelo>
         return create (localizacaoModelo);
     }
 
-    LocalizacaoModelo findLocalidade (String localizacao_pk) throws SQLException
+    public LocalizacaoModelo findLocalidade (String nomeDoCampo) throws SQLException
     {
+//        System.out.println ("DAO.LocalizacaoDAO.findLocalidade() ->"+nomeDoCampo);
 
-        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM PUBLIC.localizacao WHERE localizacao_pk='" + localizacao_pk + "'"))
+        try (PreparedStatement pst = this.conexaoBD.prepareStatement ("SELECT * FROM PUBLIC.localizacao WHERE localizacao_pk='" + nomeDoCampo + "'"))
         {
             LocalizacaoModelo localizacaoModelo = new LocalizacaoModelo ();
 

@@ -66,7 +66,7 @@
                             <a href="#"><span>Clientes</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
                                 <li><a href="cliente.jsp">Cadastrar</a></li>
-                                <li><a href="#">Visualizar</a></li>
+                                <li><a href="clienteListar.jsp">Visualizar</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
