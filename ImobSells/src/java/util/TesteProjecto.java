@@ -5,6 +5,7 @@
  */
 package util;
 
+import DAO.ClienteDAO;
 import DAO.ContaDAO;
 import DAO.EmailDAO;
 import DAO.EnderecoDAO;
@@ -53,45 +54,49 @@ public class TesteProjecto
 //        System.out.println ("ID -> "+ contaDAO.getIDconta (contaModelo)  );
 
         /*Teste pessa*/
- /*Modelos*/
-        PessoaModelo pessoaModelo = new PessoaModelo ();
-        PessoaDAO pessoaDAO = new PessoaDAO ();
-        SexoModelo sexoModelo = new SexoModelo ();
-        EstadoCivilModelo estadoCivilModelo = new EstadoCivilModelo ();
-        EnderecoModelo enderecoModelo = new EnderecoModelo ();
-        TelefoneModelo telefoneModelo = new TelefoneModelo ();
-        EmailModelo emailModelo = new EmailModelo ();
-        /*DAO*/
-        SexoDAO sexoDAO = new SexoDAO ();
-        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO ();
-        EnderecoDAO enderecoDAO = new EnderecoDAO ();
-        TelefoneDAO telefoneDAO = new TelefoneDAO ();
-        EmailDAO emailDAO = new EmailDAO ();
-        /*Definição*/
-        sexoModelo.setSexo_pk (1);
-        estadoCivilModelo.setEstado_civili_pk (1);
-        telefoneModelo.setTelefone_pk (1);
-        enderecoModelo.setEndereco_pk (1);
-        emailModelo.setEmail_pk (1);
-
-        int sexoID = sexoModelo.getSexo_pk ();
-        int estado_civilID = estadoCivilModelo.getEstado_civili_pk ();
-        int telefoneID = telefoneModelo.getTelefone_pk ();
-        int enderecoID = enderecoModelo.getEndereco_pk ();
-        int emailID = emailModelo.getEmail_pk ();
-
-        pessoaModelo.setNome ("Aida Amaral");
-        pessoaModelo.setData_nascimento ("21-07-2021");
-        pessoaModelo.setSexo_fk (sexoDAO.getSexo_pk (sexoID));
-        pessoaModelo.setEstado_civil_fk (estadoCivilDAO.getEstadoCivil_pk (estado_civilID));
-        pessoaModelo.setEndereco_fk (enderecoDAO.getEndereco_pk (enderecoID));
-        pessoaModelo.setTelefone_fk (telefoneDAO.getTelefone (telefoneID));
-        pessoaModelo.setEmail_fk (emailDAO.getEmail_pk (emailID));
+// /*Modelos*/
+//        PessoaModelo pessoaModelo = new PessoaModelo ();
+//        PessoaDAO pessoaDAO = new PessoaDAO ();
+//        SexoModelo sexoModelo = new SexoModelo ();
+//        EstadoCivilModelo estadoCivilModelo = new EstadoCivilModelo ();
+//        EnderecoModelo enderecoModelo = new EnderecoModelo ();
+//        TelefoneModelo telefoneModelo = new TelefoneModelo ();
+//        EmailModelo emailModelo = new EmailModelo ();
+//        /*DAO*/
+//        SexoDAO sexoDAO = new SexoDAO ();
+//        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO ();
+//        EnderecoDAO enderecoDAO = new EnderecoDAO ();
+//        TelefoneDAO telefoneDAO = new TelefoneDAO ();
+//        EmailDAO emailDAO = new EmailDAO ();
+//        /*Definição*/
+//        sexoModelo.setSexo_pk (1);
+//        estadoCivilModelo.setEstado_civili_pk (1);
+//        telefoneModelo.setTelefone_pk (1);
+//        enderecoModelo.setEndereco_pk (1);
+//        emailModelo.setEmail_pk (1);
+//
+//        int sexoID = sexoModelo.getSexo_pk ();
+//        int estado_civilID = estadoCivilModelo.getEstado_civili_pk ();
+//        int telefoneID = telefoneModelo.getTelefone_pk ();
+//        int enderecoID = enderecoModelo.getEndereco_pk ();
+//        int emailID = emailModelo.getEmail_pk ();
+//
+//        pessoaModelo.setNome ("Aida Amaral");
+//        pessoaModelo.setData_nascimento ("21-07-2021");
+//        pessoaModelo.setSexo_fk (sexoDAO.getSexo_pk (sexoID));
+//        pessoaModelo.setEstado_civil_fk (estadoCivilDAO.getEstadoCivil_pk (estado_civilID));
+//        pessoaModelo.setEndereco_fk (enderecoDAO.getEndereco_pk (enderecoID));
+//        pessoaModelo.setTelefone_fk (telefoneDAO.getTelefone (telefoneID));
+//        pessoaModelo.setEmail_fk (emailDAO.getEmail_pk (emailID));
+//        
+//        System.out.println ("Pessoa modelo ->" + pessoaModelo.toString ());
+//        System.out.println ("Last address ->" + telefoneDAO.pegarUltimoTelefone ());
+//        System.out.println ("Last address ->" + emailDAO.pegarUltimoEmail ());
+//        System.out.println ("Last address ->" + enderecoDAO.pegarUltimoEndereco ());
+    
+        ClienteDAO clienteDAO = new ClienteDAO ();
         
-        System.out.println ("Pessoa modelo ->" + pessoaModelo.toString ());
-        System.out.println ("Last address ->" + telefoneDAO.pegarUltimoTelefone ());
-        System.out.println ("Last address ->" + emailDAO.pegarUltimoEmail ());
-        System.out.println ("Last address ->" + enderecoDAO.pegarUltimoEndereco ());
+        System.out.println ("util.TesteProjecto.main() -> 8"+clienteDAO.getIDpessoa ());
 
 //        pessoaDAO.inserirPessoa (pessoaModelo);
     }

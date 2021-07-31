@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-console.toString();
 function carregarComboBox(id, item)
 {
     var iterar, conteudo;
@@ -45,7 +44,7 @@ function guardarFormCliente(acao)
     }
 
 
-    console.log("Executou");
+//    console.log("Executou");
 
     if (erro)
         return;
@@ -53,3 +52,12 @@ function guardarFormCliente(acao)
     form.submit();
 }
 
+function eliminarFormCliente(acao)
+{
+    var form = document.getElementById("clienteForm");
+    form.action = acao;
+    form.method = "post";
+//    alert(acao)
+        console.log("Executou");
+    form.submit();
+}

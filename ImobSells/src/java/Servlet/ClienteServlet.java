@@ -130,9 +130,8 @@ public class ClienteServlet extends HttpServlet
                 enderecoModelo.setNumero_casa (numero_casaID);
                 enderecoModelo.setRua (ruaID);
                 enderecoModelo.setLocalizacaoModelo (local);
-                
-//                System.out.println ("Servlet.ClienteServlet.service() ->"+enderecoModelo.toString ());
 
+//                System.out.println ("Servlet.ClienteServlet.service() ->"+enderecoModelo.toString ());
                 enderecoDAO.inserirEndereco (enderecoModelo);
                 telefoneDAO.inserirTelefone (telefoneModelo);
                 emailDAO.inserirEmail (emailModelo);
@@ -152,7 +151,6 @@ public class ClienteServlet extends HttpServlet
                 pessoaModelo.setEmail_fk (emailDAO.getEmail_pk (emailID));
 
 //                System.out.println ("Servlet.ClienteServlet.service()" + pessoaModelo.toString ());
-
                 pessoaDAO.inserirPessoa (pessoaModelo);
                 int ultima_pessoa = pessoaDAO.getUltimaPessoa ();
                 int cboTipoCLiente = Integer.parseInt (req.getParameter ("comboTipoCLiente"));
@@ -169,6 +167,21 @@ public class ClienteServlet extends HttpServlet
                 out.println ("</html>");
 
                 resp.sendRedirect (redirecionar);
+            }
+            else if (operacao.equals ("eliminar"))
+            {
+                System.out.println ("Servlet.ClienteServlet.service()");
+                PessoaDAO pessoaDAO= new PessoaDAO ();
+                ClienteDAO clienteDAO = new ClienteDAO ();
+                ClienteModelo clienteModelo = new ClienteModelo ();
+                
+                PessoaModelo pessoaModelo = new PessoaModelo ();
+                
+                int cliente_id = pessoaDAO.getPessoa(Integer.parseInt (req.getParameter ("pessoa_fk")));
+                pessoaModelo.setPessoa_pk (cliente_id);
+                clienteModelo.setPessoa_fk (cliente_id);
+                clienteDAO.eliminarCliente (clienteModelo);
+                pessoaDAO.eliminarPessoa (pessoaModelo);
             }
         }
         catch (ClassNotFoundException ex)

@@ -86,7 +86,7 @@ public class HtmlComboBoxes
         return html.toString ();
     }
 
-    public String selectLocalizacao (String tabela ,
+    public String selectMany (String tabela ,
                                      String formulario ,
                                      String nome ,
                                      String value ,

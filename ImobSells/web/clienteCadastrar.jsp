@@ -105,7 +105,7 @@
                                     <label for="txtData_nascimento">Data de nascimento</label>
                                     <input name="txtData_nascimento" id="txtData_nascimento" class="form-control datepicker" required>
                                     <input type="button" value="Selecione uma data" id="btn_txtData_nascimento"/>
-                                    <script type="text/javascript">//<![CDATA[
+                                    <script type="text/javascript">
                                         var cal = Calendar.setup({
                                             onSelect: function (cal) {
                                                 cal.hide()
@@ -113,7 +113,6 @@
                                             showTime: true
                                         });
                                         cal.manageFields("btn_txtData_nascimento", "txtData_nascimento", "%Y / %m / %d");
-                                        //]]>
                                     </script>
                                 </div>
                             </div>
@@ -177,14 +176,14 @@
                             <div class="row">
                                 <div class="form-control">
                                     <label for="pais">Pais</label>
-                                    <%= new HtmlComboBoxes ().selectLocalizacao ("localizacao" , "clienteForm" , "comboPais" , "localizacao_pk" , "designacao" , "" , "" , "1")%>
+                                    <%= new HtmlComboBoxes ().selectMany ("localizacao" , "clienteForm" , "comboPais" , "localizacao_pk" , "designacao" , "" , "" , "1")%>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-control">
                                     <label for="provincia">Provincia</label>
-                                    <%= new HtmlComboBoxes ().selectLocalizacao ("localizacao" , "clienteForm" , "comboProvincia" , "localizacao_pk" , "designacao" , "" , "" , "2")%>
+                                    <%= new HtmlComboBoxes ().selectMany ("localizacao" , "clienteForm" , "comboProvincia" , "localizacao_pk" , "designacao" , "" , "" , "2")%>
                                 </div>
                             </div>
 
@@ -192,7 +191,7 @@
                             <div class="row">
                                 <div class="form-control">
                                     <label for="municipio">Municipio</label>
-                                    <%= new HtmlComboBoxes ().selectLocalizacao ("localizacao" , "clienteForm" , "comboMunicipio" , "localizacao_pk" , "designacao" , "" , "" , "3")%>
+                                    <%= new HtmlComboBoxes ().selectMany ("localizacao" , "clienteForm" , "comboMunicipio" , "localizacao_pk" , "designacao" , "" , "" , "3")%>
 
                                 </div>
                             </div>
@@ -259,6 +258,7 @@
                             <button type="button" class="btn btn-warning"onclick="location.href = 'homeRoot.jsp'">
                                 Voltar
                             </button>
+                            
                         </div>
                     </div>
                 </form>

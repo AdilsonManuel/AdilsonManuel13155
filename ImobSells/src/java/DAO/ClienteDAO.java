@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import util.ConexaoBD;
+import util.ConstantesProjecto;
 
 /**
  *
@@ -24,7 +25,7 @@ public class ClienteDAO
 
     private Connection conexaoBD;
 
-    public ClienteDAO () throws ClassNotFoundException , SQLException
+    public ClienteDAO () throws ClassNotFoundException, SQLException
     {
         this.conexaoBD = new ConexaoBD ().getConnection ();
     }
@@ -35,8 +36,8 @@ public class ClienteDAO
                 + "	pessoa_fk, tipo_cliente_fk)\n"
                 + "	VALUES ( ?, ?);"))
         {
-            pst.setInt (1 , clienteModelo.getPessoa_fk ());
-            pst.setInt (2 , clienteModelo.getTipo_cliente_fk ());
+            pst.setInt (1, clienteModelo.getPessoa_fk ());
+            pst.setInt (2, clienteModelo.getTipo_cliente_fk ());
 
             pst.execute ();
             pst.close ();
@@ -74,7 +75,7 @@ public class ClienteDAO
         {
             List<ClienteModelo> listaClienteModelos = new ArrayList<ClienteModelo> ();
             ResultSet rs = pst.executeQuery ();
-            pst.setInt (1 , clientePK);
+            pst.setInt (1, clientePK);
             while (rs.next ())
             {
                 ClienteModelo clienteModelo = new ClienteModelo ();
@@ -95,7 +96,7 @@ public class ClienteDAO
     {
         try (PreparedStatement pst = this.conexaoBD.prepareStatement ("DELETE FROM public.cliente SET WHERE pessoa_fk=?"))
         {
-            pst.setInt (1 , clienteModelo.getPessoa_fk ());
+            pst.setInt (1, clienteModelo.getPessoa_fk ());
 
             pst.execute ();
             pst.close ();
@@ -112,7 +113,7 @@ public class ClienteDAO
 
             PreparedStatement pst = conexaoBD.prepareStatement (query);
 
-            pst.setString (1 , nome);
+            pst.setString (1, nome);
 
             rs = pst.executeQuery ();
             if (rs.next ())
@@ -124,10 +125,32 @@ public class ClienteDAO
         }
         catch (SQLException ex)
         {
-            JOptionPane.showMessageDialog (null , ex);
+            JOptionPane.showMessageDialog (null, ex);
         }
 
         return false;
+    }
+
+    public int getIDpessoa () throws ClassNotFoundException, SQLException
+    {
+        String query = "SELECT pessoa_fk FROM public.cliente";
+        PreparedStatement pst = this.conexaoBD.prepareStatement (query);
+        ResultSet rs = pst.executeQuery ();
+
+        try
+        {
+            if (rs.next ())
+            {
+                return rs.getInt ("pessoa_fk");
+            }
+            return ConstantesProjecto.INVALID;
+        }
+        catch (SQLException e)
+        {
+            System.err.println (e);
+        }
+        return 0;
+
     }
 
 }
