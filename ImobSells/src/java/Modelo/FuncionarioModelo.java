@@ -15,20 +15,20 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ClienteModelo extends PessoaModelo implements Serializable
+public class FuncionarioModelo extends PessoaModelo implements Serializable
 {
+    private int funcionario_pk,tipo_funcionario_fk,pessoa_fk;
 
-    private int pessoa_fk,cliente_pk,tipo_cliente_fk;
-
-    public ClienteModelo (int pessoa_fk , int cliente_pk , int tipo_cliente_fk)
+    public FuncionarioModelo (int funcionario_pk, int tipo_funcionario_fk, int pessoa_fk)
     {
+        this.funcionario_pk = funcionario_pk;
+        this.tipo_funcionario_fk = tipo_funcionario_fk;
         this.pessoa_fk = pessoa_fk;
-        this.cliente_pk = cliente_pk;
-        this.tipo_cliente_fk = tipo_cliente_fk;
     }
 
-    public ClienteModelo ()
+    public FuncionarioModelo ()
     {
     }
-
+    
+    
 }

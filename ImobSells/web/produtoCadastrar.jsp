@@ -48,7 +48,7 @@
                 </li>
             </ul>
         </nav>
-        <form class="main-form needs-validation" id="clienteForm" name="clienteForm" method="POST">
+        <form class="main-form needs-validation" id="produtoForm" name="produtoForm" method="POST">
             <div   class="col-md-10">
                 <fieldset >
                     <legend class="legenda col-md-8" >Dados do Produto</legend> 
@@ -78,7 +78,7 @@
                         <div class="col-md-8" >
                             <i class="fa fa-folder" aria-hidden="true"></i>
                             <label class="control-label">Imagem </label>
-                            <input type="file" class="form-control" name="imagem" >
+                            <input type="file" class="form-control" id="txtImagem" name="txtImagem" >
                             <small class="form-text text-muted">
                                 Selecione uma imagem para o produto.
                             </small>
@@ -103,7 +103,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="txtUltimoNome">Quantidade</label>
-                                <input type="text" name="txtQualidade" id="txtQualidade" class="form-control">
+                                <input type="text" name="txtQuantidade" id="txtQuantidade" class="form-control">
                                 <small class="form-text text-muted">
                                     Digite a quantidade do produto.
                                 </small>
@@ -112,7 +112,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="txtFornecedor">Fornecedor</label>
-                                <input type="text" name="txtFornecedor" id="txtFornecedor" class="form-control">
+                                <%= new HtmlComboBoxes ().select ("fornecedor" , "produtoForm" , "comboFornecdor" , "fornecedor_pk" , "nome" , "" , "")%>
                                 <small class="form-text text-muted">
                                     Escolha o fornecedor.
                                 </small>

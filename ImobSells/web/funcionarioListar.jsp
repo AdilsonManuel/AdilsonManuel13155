@@ -1,17 +1,19 @@
 <%-- 
-    Document   : clienteListar
-    Created on : 26-Jul-2021, 06:32:33
+    Document   : funcionarioListar
+    Created on : 02-Aug-2021, 18:52:50
     Author     : azm
 --%>
 
+
+
 <%@page import="Modelo.PessoaModelo"%>
-<%@page import="Modelo.ClienteModelo"%>
+<%@page import="Modelo.FuncionarioModelo"%>
 <%@page import="DAO.PessoaDAO"%>
-<%@page import="DAO.ClienteDAO"%>
+<%@page import="DAO.FuncionarioDAO"%>
 <jsp:useBean id="pessoaDAO" scope="page" class="DAO.PessoaDAO"/>
-<jsp:useBean id="clienteDAO" scope="page" class="DAO.ClienteDAO"/>
+<jsp:useBean id="funcionarioDAO" scope="page" class="DAO.FuncionarioDAO"/>
 <jsp:useBean id="pessoaModelo" scope="page" class="Modelo.PessoaModelo"/>
-<%--<jsp:useBean id="clienteModelo" scope="page" class="Modelo.PessoaModelo"/>--%>
+<%--<jsp:useBean id="funcionarioModelo" scope="page" class="Modelo.FuncionarioModelo"/>--%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -47,11 +49,11 @@
 
             <div class="row">
                 <div class="col-md-10" style="margin-left: 450px">
-                    <h2 class="legenda"> Todos os Registros de Clientes </h2>
+                    <h2 class="legenda"> Todos os Registros de Funcionários </h2>
                 </div>
 
-                <!--<form id="clienteForm" name="clienteForm" class="col-md-10" method="DELETE" style="margin-left: 100px">-->
-                    <table class="table-bordered table-striped" id="clienteForm" >
+                <form id="clienteForm" name="clienteForm" class="col-md-10" style="margin-left: 100px">
+                    <table class="table-bordered table-striped">
                         <thead >
                             <tr>
                                 <th>ID</th>
@@ -68,15 +70,15 @@
                         </thead>
                         <tbody>
                             <% 
-                                clienteDAO = new ClienteDAO ();
+                                funcionarioDAO = new FuncionarioDAO ();
                                 pessoaDAO = new PessoaDAO ();
-                                List<ClienteModelo> cliente = clienteDAO.getListaCliente ();
+                                List<FuncionarioModelo> cliente = funcionarioDAO.getListaFuncionario ();
        
-                                for (ClienteModelo clienteModelo : cliente)
+                                for (FuncionarioModelo funcionarioModelo : cliente)
                                 {                                 
                             %>
                             <%
-                                            List<PessoaModelo> pessoaModelos = pessoaDAO.getDadosPessoa (clienteModelo.getPessoa_fk ());
+                                            List<PessoaModelo> pessoaModelos = pessoaDAO.getDadosPessoa (funcionarioModelo.getPessoa_fk ());
                                             for (PessoaModelo pessoaModelo1 : pessoaModelos)
                                             {
                             %>
@@ -112,9 +114,8 @@
                                 </td>
                                 <td><input type="button" class="btn btn-primary" value="Editar"></td>  
                                 <td>                             
-                                    <input type="button" class="btn btn-danger" value="Eliminar"
-                                    onclick="eliminarFormCliente('ClienteServlet?operacao=eliminar&&redirecionar=clienteListar.jsp')"       
-                                           />                        
+                                    <input type="button" class="btn btn-danger" value="Eliminar" 
+                                           onclick="eliminarFormCliente('ClienteServlet?operacao=eliminar&&redirecionar=clienteListar.jsp')" />                        
                                 </td>
                             </tr>
                             <%
@@ -123,7 +124,7 @@
                             %>
                         </tbody>
                     </table>
-                <!--</form>-->
+                </form>
 
             </div>
         </div>

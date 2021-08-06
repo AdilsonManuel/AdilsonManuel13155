@@ -12,6 +12,10 @@
         <servlet-name>ProdutoServlet</servlet-name>
         <servlet-class>Servlet.ProdutoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FuncionarioServlet</servlet-name>
+        <servlet-class>Servlet.FuncionarioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContaServlet</servlet-name>
         <url-pattern>/ContaServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ProdutoServlet</servlet-name>
         <url-pattern>/ProdutoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FuncionarioServlet</servlet-name>
+        <url-pattern>/FuncionarioServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

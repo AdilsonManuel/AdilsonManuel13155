@@ -5,8 +5,13 @@
  */
 package Servlet;
 
+import DAO.PortfolioDAO;
+import Modelo.PortfolioModelo;
+import Modelo.ProdutoModelo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,22 +36,48 @@ public class ProdutoServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, ClassNotFoundException
     {
         response.setContentType ("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter ())
-        {
-            /* TODO output your page here. You may use following sample code. */
-            out.println ("<!DOCTYPE html>");
-            out.println ("<html>");
-            out.println ("<head>");
-            out.println ("<title>Servlet ProdutoServlet</title>");            
-            out.println ("</head>");
-            out.println ("<body>");
-            out.println ("<h1>Servlet ProdutoServlet at " + request.getContextPath () + "</h1>");
-            out.println ("</body>");
-            out.println ("</html>");
-        }
+//        try (PrintWriter out = response.getWriter ())
+////        {
+//            String operacao = request.getParameter ("operacao");
+//            String redirecionar = request.getParameter ("redirecionar");
+//
+//            if (operacao.equalsIgnoreCase ("cadastrar"))
+//            {
+//                String nomeDoProduto = request.getParameter ("txtNomeProduto");
+//                String imagem = request.getParameter ("txtImagem");
+//                Double preco = Double.parseDouble (request.getParameter ("txtPreco"));
+//                String dataCadastro = request.getParameter ("txtData_cadastro");
+//                int quantidade = Integer.parseInt (request.getParameter ("txtQuantidade"));
+//                int fornecedor_pk = Integer.parseInt (request.getParameter ("comboFornecdor"));
+//                String categoria1 = request.getParameter ("comboNivel_1");
+//                String categoria2 = request.getParameter ("comboNivel_2");
+//                String categoria3 = request.getParameter ("comboNivel_3");
+//
+//                ProdutoModelo produtoModelo = new ProdutoModelo ();
+//                PortfolioModelo portfolioModelo = new PortfolioModelo ();
+//                PortfolioDAO portfolioDAO = new PortfolioDAO ();
+////                PortfolioModelo portfolioModelo1 = portfolioDAO.retornarNivel (categoria1);
+//                produtoModelo.setDesignacao (nomeDoProduto);
+//                produtoModelo.setPreco (preco);
+//                produtoModelo.setImagem (imagem);
+//                produtoModelo.setData_registro (dataCadastro);
+//                produtoModelo.setQuantidade (quantidade);
+//                produtoModelo.setFornecedor_fk (fornecedor_pk);
+//                portfolioModelo.setDesignacao (categoria1);
+//
+//            }
+//            else if (operacao.equalsIgnoreCase ("eliminar"))
+//            {
+//
+//            }
+//            else if (operacao.equalsIgnoreCase ("alterar"))
+//            {
+//
+//            }
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,7 +93,14 @@ public class ProdutoServlet extends HttpServlet
     protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        processRequest (request, response);
+        try
+        {
+            processRequest (request, response);
+        }
+        catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger (ProdutoServlet.class.getName ()).log (Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -77,7 +115,14 @@ public class ProdutoServlet extends HttpServlet
     protected void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        processRequest (request, response);
+        try
+        {
+            processRequest (request, response);
+        }
+        catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger (ProdutoServlet.class.getName ()).log (Level.SEVERE, null, ex);
+        }
     }
 
     /**

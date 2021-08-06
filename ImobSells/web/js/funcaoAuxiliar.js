@@ -32,7 +32,7 @@ function guardarFormCliente(acao)
     } else if (form.txtnome.value == "")
     {
         erro = true;
-        alert("Nome Inválido");
+        alert("Nome usuario Inválido");
     } else if (form.senha_usuario.value == "")
     {
         erro = true;
@@ -42,22 +42,58 @@ function guardarFormCliente(acao)
         erro = true;
         alert("Data de Nascimento Inválida");
     }
-
-
-//    console.log("Executou");
-
     if (erro)
         return;
     form.action = acao;
     form.submit();
 }
-
 function eliminarFormCliente(acao)
 {
     var form = document.getElementById("clienteForm");
     form.action = acao;
-    form.method = "post";
-//    alert(acao)
-        console.log("Executou");
+    form.mehod = "DELETE";
+    alert(form)
+    form.submit();
+}
+function guardarFormFuncionario(acao)
+{
+    var form = document.getElementById("funcioanrioForm");
+    var erro = false;
+    if (form.txtnome.value.trim().toLowerCase() == "root")
+    {
+        erro = true;
+        alert("Nome Inválido");
+    } else if (form.txtnome.value.trim().toLowerCase() == "admin")
+    {
+        erro = true;
+        alert("Nome Inválido");
+    } else if (form.txtnome.value == "")
+    {
+        erro = true;
+        alert("Nome usuario Inválido");
+    } else if (form.senha_usuario.value == "")
+    {
+        erro = true;
+        alert("Senha Inválida");
+    } else if (form.txtData_nascimento.value == "")
+    {
+        erro = true;
+        alert("Data de Nascimento Inválida");
+    }
+    if (erro)
+        return;
+    form.action = acao;
+    form.mehod = "POST"
+//    alert(acao);
+    form.submit();
+}
+
+function guardarFormProduto(acao)
+{
+    var form = document.getElementById("produtoForm");
+
+    form.action = acao;
+    form.mehod = "POST";
+    alert(form)
     form.submit();
 }

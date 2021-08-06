@@ -56,9 +56,9 @@ public class ClienteDAO
             while (rs.next ())
             {
                 ClienteModelo clienteModelo = new ClienteModelo ();
-                clienteModelo.setCliente_pk (rs.getInt ("cliente_pk"));
+//                clienteModelo.setCliente_pk (rs.getInt ("cliente_pk"));
                 clienteModelo.setPessoa_fk (rs.getInt ("pessoa_fk"));
-                clienteModelo.setTipo_cliente_fk (rs.getInt ("tipo_cliente_fk"));
+//                clienteModelo.setTipo_cliente_fk (rs.getInt ("tipo_cliente_fk"));
 
                 listaClienteModelos.add (clienteModelo);
 

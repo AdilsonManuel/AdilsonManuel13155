@@ -13,6 +13,7 @@ import DAO.EstadoCivilDAO;
 import DAO.PessoaDAO;
 import DAO.SexoDAO;
 import DAO.TelefoneDAO;
+import Modelo.ClienteModelo;
 import Modelo.ContaModelo;
 import Modelo.EmailModelo;
 import Modelo.EnderecoModelo;
@@ -21,6 +22,7 @@ import Modelo.PessoaModelo;
 import Modelo.SexoModelo;
 import Modelo.TelefoneModelo;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -29,7 +31,7 @@ import java.sql.SQLException;
 public class TesteProjecto
 {
 
-    public static void main (String[] args) throws ClassNotFoundException , SQLException
+    public static void main (String[] args) throws ClassNotFoundException, SQLException
     {
         /*Teste conexão*/
 //        Connection conexao = new ConexaoBD ().getConnection ();
@@ -55,7 +57,7 @@ public class TesteProjecto
 
         /*Teste pessa*/
 // /*Modelos*/
-//        PessoaModelo pessoaModelo = new PessoaModelo ();
+        PessoaModelo pessoaModelo = new PessoaModelo ();
 //        PessoaDAO pessoaDAO = new PessoaDAO ();
 //        SexoModelo sexoModelo = new SexoModelo ();
 //        EstadoCivilModelo estadoCivilModelo = new EstadoCivilModelo ();
@@ -93,10 +95,27 @@ public class TesteProjecto
 //        System.out.println ("Last address ->" + telefoneDAO.pegarUltimoTelefone ());
 //        System.out.println ("Last address ->" + emailDAO.pegarUltimoEmail ());
 //        System.out.println ("Last address ->" + enderecoDAO.pegarUltimoEndereco ());
-    
         ClienteDAO clienteDAO = new ClienteDAO ();
-        
-        System.out.println ("util.TesteProjecto.main() -> 8"+clienteDAO.getIDpessoa ());
+        PessoaDAO pessoaDAO = new PessoaDAO ();
+        List<ClienteModelo> cliente = clienteDAO.getListaCliente ();
+       
+        for (ClienteModelo clienteModelo : cliente)
+        {
+            List<PessoaModelo> pessoaModelos = pessoaDAO.getDadosPessoa (clienteModelo.getPessoa_fk ());
+            for (PessoaModelo pessoaModelo1 : pessoaModelos)
+            {
+                System.out.println ("ID -> " + pessoaModelo1.getPessoa_pk () + " - "
+                        + "Nome -> " + pessoaModelo1.getNome () + " - "
+                        + "Sexo -> " + pessoaModelo1.getSexo_fk ().getNome () + " - "
+                        + "Data de Nascimento -> " + pessoaModelo1.getData_nascimento () + " - "
+                        + "Telfeone -> " + pessoaModelo1.getTelefone_fk ().getNumero () + " - "
+                        + "Estado civil -> " + pessoaModelo1.getEstado_civil_fk ().getNome () + " - "
+                        + "Endereco ->" + pessoaModelo1.getEndereco_fk ().getNumero_casa () + "," + pessoaModelo1.getEndereco_fk ().getRua () + ","
+                        + pessoaModelo1.getEndereco_fk ().getLocalizacaoModelo ().getDesignacao () + " - "
+                        + "Email ->" + pessoaModelo1.getEmail_fk ().getNome ());
+
+            }
+        }
 
 //        pessoaDAO.inserirPessoa (pessoaModelo);
     }

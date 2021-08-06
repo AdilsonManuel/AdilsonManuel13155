@@ -73,7 +73,7 @@
                             <a href="#"><span>Funcionário</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
                                 <li><a href="funcionarioCadastrar.jsp">Cadastrar</a></li>
-                                <li><a href="#">Visualizar</a></li>
+                                <li><a href="funcionarioListar.jsp">Visualizar</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

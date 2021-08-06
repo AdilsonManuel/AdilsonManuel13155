@@ -10,6 +10,7 @@ import DAO.ContaDAO;
 import DAO.EmailDAO;
 import DAO.EnderecoDAO;
 import DAO.EstadoCivilDAO;
+import DAO.FuncionarioDAO;
 import DAO.LocalizacaoDAO;
 import DAO.PessoaDAO;
 import DAO.SexoDAO;
@@ -19,6 +20,7 @@ import Modelo.ContaModelo;
 import Modelo.EmailModelo;
 import Modelo.EnderecoModelo;
 import Modelo.EstadoCivilModelo;
+import Modelo.FuncionarioModelo;
 import Modelo.LocalizacaoModelo;
 import Modelo.PessoaModelo;
 import Modelo.SexoModelo;
@@ -39,8 +41,8 @@ import util.ConstantesProjecto;
  *
  * @author azm
  */
-@WebServlet(name = "ContaServlet", urlPatterns = "/ServLet/ContaServlet")
-public class ClienteServlet extends HttpServlet
+@WebServlet(name = "FuncionarioServlet", urlPatterns = "/ServLet/FuncionarioServlet")
+public class FuncionarioServlet extends HttpServlet
 {
 
     /**
@@ -52,30 +54,20 @@ public class ClienteServlet extends HttpServlet
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest (HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest (HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
-    {
-        response.setContentType ("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter ())
-        {
-
-        }
-    }
-
-    @Override
-    protected void service (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         resp.setContentType ("text/html;charset=UTF-8");
         try (PrintWriter out = resp.getWriter ())
         {
             String operacao = req.getParameter ("operacao");
             String redirecionar = req.getParameter ("redirecionar");
-            System.out.println ("Servlet.ClienteServlet.service() -> " + operacao);
-            if (operacao.equalsIgnoreCase ("Cadastrar"))
+
+            if (operacao.equals ("Cadastrar"))
             {
 
                 /*DAO*/
-                ClienteDAO clienteDAO = new ClienteDAO ();
+                FuncionarioDAO funcionarioDAO = new FuncionarioDAO ();
                 ContaDAO contaDAO = new ContaDAO ();
                 EnderecoDAO enderecoDAO = new EnderecoDAO ();
                 LocalizacaoDAO localizacaoDAO = new LocalizacaoDAO ();
@@ -94,12 +86,12 @@ public class ClienteServlet extends HttpServlet
                 TelefoneModelo telefoneModelo = new TelefoneModelo ();
                 EmailModelo emailModelo = new EmailModelo ();
                 PessoaModelo pessoaModelo = new PessoaModelo ();
-                ClienteModelo clienteModelo = new ClienteModelo ();
+                FuncionarioModelo funcionarioModelo = new FuncionarioModelo ();
                 LocalizacaoModelo localizacaoModelo = new LocalizacaoModelo ();
 
                 String nome_usuario = req.getParameter ("nome_usuario");
                 String senha_usuario = req.getParameter ("senha_usuario");
-                int tipo_conta = ConstantesProjecto.CLIENTE_CADASTRADO;
+                int tipo_conta = ConstantesProjecto.FUNCIONARIO;
 
                 contaModelo.setNomeUsuario (nome_usuario);
                 contaModelo.setSenha_usuario (senha_usuario);
@@ -114,6 +106,7 @@ public class ClienteServlet extends HttpServlet
                 emailModelo.setNome (req.getParameter ("txtEmail"));
 
                 String paisID = req.getParameter ("comboPais");
+//                localizacaoModelo.setLocalizacao_pk ("1");
 
                 String provinciaID = req.getParameter ("comboProvincia");
                 String MuniccipioID = req.getParameter ("comboMunicipio");
@@ -121,6 +114,7 @@ public class ClienteServlet extends HttpServlet
                 String ruaID = req.getParameter ("txtRua");
                 String numero_casaID = req.getParameter ("txtNumero_casa");
 
+//                System.out.println ("Servlet.ClienteServlet.service()" + localizacaoDAO.findLocalidade (MuniccipioID));
                 String nome = req.getParameter ("txtnome");
                 String data_nascimento = req.getParameter ("txtData_nascimento");
 
@@ -129,6 +123,7 @@ public class ClienteServlet extends HttpServlet
                 enderecoModelo.setRua (ruaID);
                 enderecoModelo.setLocalizacaoModelo (local);
 
+//                System.out.println ("Servlet.ClienteServlet.service() ->"+enderecoModelo.toString ());
                 enderecoDAO.inserirEndereco (enderecoModelo);
                 telefoneDAO.inserirTelefone (telefoneModelo);
                 emailDAO.inserirEmail (emailModelo);
@@ -150,32 +145,31 @@ public class ClienteServlet extends HttpServlet
 //                System.out.println ("Servlet.ClienteServlet.service()" + pessoaModelo.toString ());
                 pessoaDAO.inserirPessoa (pessoaModelo);
                 int ultima_pessoa = pessoaDAO.getUltimaPessoa ();
-                int cboTipoCLiente = Integer.parseInt (req.getParameter ("comboTipoCLiente"));
-                clienteModelo.setTipo_cliente_fk (cboTipoCLiente);
-                clienteModelo.setPessoa_fk (ultima_pessoa);
-                clienteDAO.inserirCliente (clienteModelo);
+                int cboTipoFuncionario = Integer.parseInt (req.getParameter ("comboTipoFuncionario"));
+                funcionarioModelo.setTipo_funcionario_fk (cboTipoFuncionario);
+                funcionarioModelo.setPessoa_fk (ultima_pessoa);
+                funcionarioDAO.inserirFuncionario (funcionarioModelo);
 //                System.out.println ("Servlet.ClienteServlet.service()" + clienteModelo.toString ());
                 // imprime o nome do cliente que foi adicionado
                 out.println ("<html>");
                 out.println ("<body>");
-                out.println ("Cliente " + pessoaModelo.getNome ()
+                out.println ("Funcionario " + pessoaModelo.getNome ()
                         + " adicionado com sucesso");
                 out.println ("</body>");
                 out.println ("</html>");
 
                 resp.sendRedirect (redirecionar);
             }
-            else if (operacao.equalsIgnoreCase ("Eliminar"))
+            else if (operacao.equals ("eliminar"))
             {
-
-                PessoaDAO pessoaDAO = new PessoaDAO ();
+                System.out.println ("Servlet.ClienteServlet.service()");
+                PessoaDAO pessoaDAO= new PessoaDAO ();
                 ClienteDAO clienteDAO = new ClienteDAO ();
                 ClienteModelo clienteModelo = new ClienteModelo ();
-
+                
                 PessoaModelo pessoaModelo = new PessoaModelo ();
-
-                int cliente_id = pessoaDAO.getPessoa (Integer.parseInt (req.getParameter ("pessoa_fk")));
-                System.out.println ("Servlet.ClienteServlet.service()" + Integer.parseInt (req.getParameter ("pessoa_fk")));
+                
+                int cliente_id = pessoaDAO.getPessoa(Integer.parseInt (req.getParameter ("pessoa_fk")));
                 pessoaModelo.setPessoa_pk (cliente_id);
                 clienteModelo.setPessoa_fk (cliente_id);
                 clienteDAO.eliminarCliente (clienteModelo);
